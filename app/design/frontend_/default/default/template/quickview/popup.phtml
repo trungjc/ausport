@@ -1,0 +1,145 @@
+<?php
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_Quickview
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */?>
+ <?php $_helper = Mage::helper('catalog/output');?>
+ <?php $productId = Mage::registry('product_popup_id');?>
+  <div  class="popup" id="popup<?php echo $productId?>" style="width:<?php echo Mage::getStoreConfig('quickview/frontend/width')?>px !important;height:<?php echo Mage::getStoreConfig('quickview/frontend/height')?>px !important">
+
+                 <div class="popup-header"><a onclick="closePopup()" href="javascript:void(0)"></a></div>
+
+                 <div class="popup-arrow"></div>
+
+   <div class="main-popup">
+
+
+                    <div class="wrap">
+                     <?php $_product = Mage::getModel('catalog/product')->load($productId);?>
+                       
+                 <div class="product-essential">
+		<form id="product_addtocart_form" method="post" action="">
+		  <div class="no-display">
+			<input type="hidden" value="1" name="product">
+			<input type="hidden" value="" id="related-products-field" name="related_product">
+		  </div>
+		  <div class="product-shop">
+			<div class="product-name">
+			  <h1><a href="<?php echo  $_product->getProductUrl();?>"><?php echo $_product->getName();?></a></h1>
+			</div>
+			<div class="product-options-bottom">
+			  <table border="0">
+				<tbody>
+				  <tr>
+					<td class="last">
+						<?php if(Mage::getStoreConfig('quickview/frontend/shortdesc')):?>
+						<b>Short  Description</b>
+                          <p class="top-desc"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?> </p>
+						 <?php endif;?>
+                      <?php if(Mage::getStoreConfig('quickview/frontend/desc')):?>	
+                     
+                          <b>Full Description</b>
+                          <p class="top-desc"><?php echo $_helper->productAttribute($_product, nl2br($_product->getDescription()), 'description') ?> </p>
+					   <?php endif;?>
+					<?php if(Mage::getStoreConfig('quickview/frontend/addinfo')):?>
+                             <?php
+                            $attributes = $_product->getAttributes();
+                            foreach ($attributes as $attribute) {
+                                if ($attribute->getIsVisibleOnFront() && $attribute->getIsUserDefined()) {
+                                    $value = $attribute->getFrontend()->getValue($_product);
+                                    if (strlen($value) && $_product->hasData($attribute->getAttributeCode())) {
+                                        $Adddata[$attribute->getAttributeCode()] = array(
+                                        'label' => $attribute->getFrontend()->getLabel(),
+                                        'value' => $value);
+                                    }
+                                }
+                            }
+                            ?>
+                             <p class="top-desc">
+                                        <b>Additional Information</b>
+                                        <table id="product-attribute-specs-table" class="data-table">
+                                            <tbody>
+                                                <?php foreach ($Adddata as $_data):?>
+                                                    <tr class="first odd">
+                                                        <th class="label"><?php echo $_data['label']?></th>
+                                                        <td class="data last"><?php echo $_data['value']?></td>
+                                                    </tr>
+                                                <?php endforeach;?>
+                                             </tbody>
+                                        </table>
+                                        <script type="text/javascript">decorateTable('product-attribute-specs-table')</script>
+                             </p>
+						  <?php endif;?>	 
+					</td>
+				  </tr>
+				</tbody>
+			  </table>
+			</div>
+			<?php echo $this->getPriceHtml($_product, false, '_clone') ?>
+						
+		  </div>
+		  <div class="product-img-box">
+			 <?php if(Mage::getStoreConfig('quickview/frontend/image')):?>
+				<a href="<?php echo  $_product->getProductUrl();?>">
+				<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(Mage::getStoreConfig('quickview/frontend/imagesize')); ?>" width="<?php echo Mage::getStoreConfig('quickview/frontend/imagesize')?>" height="<?php echo Mage::getStoreConfig('quickview/frontend/imagesize')?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+				</a>
+             <?php endif;?>	 
+            
+            <div class="add-to-box">
+	
+					<label for="qty"><?php echo $this->__('Qty') ?>:</label>
+					<input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                    <button onclick="setLocation('<?php echo  $_product->getProductUrl();?>?options=cart')" class="button big" title="BUY NOW   &gt;" type="button"><span><span>Add to Cart</span></span></button>
+					
+	
+                
+               
+			</div>
+            
+		  </div>
+		  
+		  <div class="clearer"></div>
+          
+          
+		 
+			
+		</form>
+	  </div>
+                
+
+
+                       </div>
+
+
+                </div>
+
+                  <div class="popup-footer"></div>
+
+                <!--Popap-->
+
+              </div>

@@ -1,0 +1,248 @@
+<?php
+/**
+ * Mage World
+ *
+ * NOTICE OF LICENSE
+
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Mage World (http://www.mageworld.com)
+ */
+/**
+ * 
+ *
+ * @category   Glace
+ * @package    Glace_Dailydeal
+ * @author     Magento Developer <chinhbt@asiaconnect.com.vn>
+ */
+?>
+<?php
+//Zend_Debug::dump($this->getCollection());die();
+//$now   = new DateTime();
+$month = date("m");
+$year = date("Y");
+$currFromDate = $month . '/01/' . $year; //alert(fromdate);
+if (($month == 02) && ($year % 4 == 0)) {
+    $currToDate = $month . '/29/' . $year;
+} else if (($month == 02) && ($year % 4 != 0)) {
+    $currToDate = $month . '/28/' . $year;
+} else if (($month == 04) || ($month == 09) || ($month == 06) || ($month == 11)) {
+    $currToDate = $month . '/30/' . $year;
+} else {
+    $currToDate = $month . '/31/' . $year;
+}
+if ($this->getCollection()):
+    ?>
+    <?php if ($this->canDisplayContainer()) { ?>
+        <?php if ($this->getGridHeader()): ?>
+            <div class="content-header">
+                <table cellspacing="0">
+                    <tr>
+                        <td style="width:50%;"><h2><?php echo $this->getGridHeader(); ?></h2></td>
+                    </tr>
+                </table>
+            </div>
+        <?php endif; /* if($this->getGridHeader()): */ ?>
+        <div id="<?php echo $this->getId() ?>">
+        <?php }else { ?>
+            <?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+        <?php } /* if($this->canDisplayContainer()){ */ ?>
+        <?php if ($this->getStoreSwitcherVisibility() || $this->getDateFilterVisibility()) { ?>
+            <!-- Select Website --><!--
+            
+            --><!-- End Select Website -->
+            <!-- Actions -->
+            <table cellspacing="0" class="actions">
+                <tr>
+                    <?php if ($this->getDateFilterVisibility()): ?>
+                        <td class="a-left filter">
+                            <div class="f-left">
+                                <?php echo Mage::helper('dailydeal')->__('From Date') ?>: 
+                                <input type="text" name="report_from" id="report_from" value="<?php echo $this->report_from; ?>" /> 
+                                <img title="Select date" id="report_from_trig" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/images/grid-cal.gif'; ?>"  class="v-middle"/>
+                                <script type="text/javascript">
+                                    // <![CDATA[
+                                    Calendar.setup({
+                                        inputField : 'report_from',
+                                        ifFormat : '%m-%d-%Y',
+                                        button : 'report_from_trig',
+                                        align : 'Bl',
+                                        singleClick : true
+                                    });
+                                    // ]]>
+                                </script>
+                            </div>
+
+                            <div class="f-left" style="padding-left: 20px;">
+                                <?php echo Mage::helper('dailydeal')->__('To Date') ?>: 
+                                <input type="text" name="report_to" id="report_to" value="<?php echo $this->report_to; ?>" /> 
+                                <img title="Select date" id="report_to_trig" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/images/grid-cal.gif'; ?>"  class="v-middle"/>
+                                <script type="text/javascript">
+                                    // <![CDATA[
+                                    Calendar.setup({
+                                        inputField : 'report_to',
+                                        ifFormat : '%m-%d-%Y',
+                                        button : 'report_to_trig',
+                                        align : 'Bl',
+                                        singleClick : true
+                                    });
+                                    // ]]>
+                                </script>
+                            </div>
+                            <div class="f-left" style="padding-left: 20px;">
+                                <?php echo $this->getRefreshButtonHtml() ?>
+                            </div>
+                        </td> 
+                    <?php endif; ?>
+                </tr>
+            </table>
+        <?php } ?>
+        <?php if ($this->getMassactionBlock()->isAvailable()): ?>
+            <?php echo $this->getMassactionBlockHtml() ?>
+        <?php endif ?>
+        <!-- Create Grid --> 
+        <div class="grid">
+            <table cellspacing="0" class="data" id="<?php echo $this->getId() ?>_table">
+                <col/>
+                <?php foreach ($this->getColumns() as $_column): ?>
+                    <col <?php echo $_column->getHtmlProperty() ?>/>
+                <?php endforeach; ?>
+                <?php if ($this->getHeadersVisibility() || $this->getFilterVisibility()): ?>
+                    <thead>
+                        <?php if ($this->getHeadersVisibility()): ?>
+                            <tr class="headings">
+                                <th class="no-link" style="width:100px"><span class="no-br"><?php echo $this->getPeriodText() ?></span></th>
+                                <?php foreach ($this->getColumns() as $_column): ?>
+                                    <th <?php echo $_column->getHeaderHtmlProperty() ?>><span class="no-br"><?php echo $_column->getHeaderHtml() ?></span></th>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endif; ?>
+                    </thead>
+                <?php endif; ?> 
+                <tbody>
+                    <?php if ($this->getCollection()->getSize()): ?>
+                        <?php foreach ($this->getCollection()->getIntervals() as $_index => $_item) { ?>
+                            <?php
+                            $report = Mage::getModel('dailydeal/dailydeal')->getCollection()
+                                    ->addFieldToFilter('start_date_time', array('to' => $_item['end']))
+                                    ->addFieldToFilter('end_date_time', array('from' => $_item['start']));
+                            ?>
+                            <?php $rows = count($report); ?>
+                            <?php if ($rows > 0) { ?>
+                                <tr title="<?php echo $this->getRowUrl($_item) ?>"<?php if ($_class = $this->getRowClass($_item)): ?> class="<?php echo $_class; ?>"<?php endif; ?>>
+                                    <td rowspan="<?php echo $rows + ($this->getCountTotals() && $this->getSubtotalVisibility() ? 1 : 0) + 1 ?>"><?php echo $_index ?></td>
+                                    <?php
+                                    $i = 0;
+                                    foreach ($report as $_subIndex => $_subItem):
+                                        ?>
+                                        <?php if ($i > 0): ?>
+                                            <!-- hang chua du lieu -->
+                                        <tr title="<?php echo $this->getRowUrl($_item) ?>"<?php if ($_class = $this->getRowClass($_item)): ?> class="<?php echo $_class; ?>"<?php endif; ?>>
+                                        <?php endif; ?>
+                                        <?php $i++; ?>
+                                        <?php
+                                        $j = 0;
+                                        $numColumns = $this->getColumnsCount();
+                                        foreach ($this->getColumns() as $_column):?>
+                                            <td class="<?php echo $_column->getCssProperty() ?> <?php echo++$j == $numColumns ? 'last' : '' ?>">
+                                                <?php echo (($_html = $_column->getRowField($_subItem)) != '' ? $_html : '&nbsp;') ?>
+
+                                            </td>
+                                        <?php endforeach; ?>
+                                    </tr>                    
+                                <?php endforeach; ?>
+                                <!-- hang phu -->
+                                <tr title="<?php echo $this->getRowUrl($_item) ?>"<?php if ($_class = $this->getRowClass($_item)): ?> class="<?php echo $_class; ?>"<?php endif; ?>>
+                                    <?php for ($i = 0; $i < 8; $i++) { ?>
+                                        <td></td>
+                                    <?php } ?>
+                                    <td><a href="<?php echo Mage::helper('adminhtml')->getUrl('dailydeal/adminhtml_dealitems/newdaily/', array('start' => $_index)); ?>"><?php echo Mage::helper('dailydeal')->__('Add deal'); ?></a></td>
+                                </tr>
+                            <?php } else { ?>
+                                </tr>
+                                <tr  title="<?php echo $this->getRowUrl($_item) ?>"<?php if ($_class = $this->getRowClass($_item)): ?> class="<?php echo $_class; ?>"<?php endif; ?>>
+                                    <td ><?php echo $_item['title']; ?></td>
+                                    <?php for ($i = 0; $i < 8; $i++) { ?>
+                                        <td></td>
+                                    <?php } ?>
+                                    <td><a href="<?php echo Mage::helper('adminhtml')->getUrl('dailydeal/adminhtml_dealitems/newdaily/', array('start' => $_item['start'])) ?>"  ><?php echo Mage::helper('dailydeal')->__('Add deal'); ?></a></td>
+
+                                </tr>
+                            <?php } ?>
+                        <script type="text/javascript">
+//                            var objyearafter = document.formyear.year;
+            <?php if (!empty($_item)) { ?>
+//                    document.formmonth.month.value = '<?php echo date('m', strtotime($_item['start'])); ?>';
+            <?php } else break; ?>
+//                objyearafter.value = '<?php echo date('Y', strtotime($_item['start'])); ?>';
+                        </script>
+
+                    <?php } ?>
+
+                <?php endif; ?>
+                </tbody>
+
+            </table>
+        </div>
+        <!-- End Create Grid -->
+        <?php if ($this->canDisplayContainer()): ?>
+        </div>         
+        <script type="text/javascript">
+            <!--
+            //init JS Object 
+        <?php echo $this->getJsObjectName() ?> = new varienGrid('<?php echo $this->getId() ?>', '<?php echo $this->getGridUrl() ?>', '<?php echo $this->getVarNamePage() ?>', '<?php echo $this->getVarNameSort() ?>', '<?php echo $this->getVarNameDir() ?>', '<?php echo $this->getVarNameFilter() ?>');
+        <?php echo $this->getJsObjectName() ?>.useAjax = '<?php echo $this->getUseAjax() ?>';
+            ////alert(document.formmonth.month.value);
+//            if ((location.href.indexOf('filter') <= 0) && (document.formmonth.month.value == '0')){ 
+            if ((location.href.indexOf('filter') <= 0)){ 
+//                var date = new Date();//alert(date);alert(date.getMonth());
+//                var objyear = document.formyear.year;
+//                var	yearselect = objyear.options[objyear.selectedIndex].value;
+//                var monthselect = date.getMonth()+1;//alert(monthselect);
+//                var fromdate = monthselect+'/01/'+yearselect;//alert(fromdate);
+//
+//                if ((monthselect == 02) && (yearselect%4 == 0)){
+//                    var todate = monthselect+'/29/'+yearselect;
+//                }else if ((monthselect == 02) && (yearselect%4 != 0)){
+//                    var todate = monthselect+'/28/'+yearselect;
+//                }else if ((monthselect == 04) || (monthselect == 09) || (monthselect == 06) || (monthselect == 11)){
+//                    var todate = monthselect+'/30/'+yearselect;
+//                }else {
+//                    var todate = monthselect+'/31/'+yearselect;
+//                }//alert(todate);
+//                document.getElementById("period_date_from").value = fromdate;
+//                document.getElementById("period_date_to").value = todate;
+        <?php echo $this->getJsObjectName(); ?>.doFilter();
+            }
+        <?php if ($this->getMassactionBlock()->isAvailable()): ?>
+            <?php echo $this->getMassactionBlock()->getJavaScript() ?>
+        <?php endif ?>
+            /* Overwrite function from switcher.phtml widget*/
+            function switchStore(obj){
+                if (obj.options[obj.selectedIndex].getAttribute('website') == 'true') {
+                    var selectionType = 'website';
+                } else if (obj.options[obj.selectedIndex].getAttribute('group') == 'true') {
+                    var selectionType = 'group';
+                } else {
+                    var selectionType = 'store';
+                }
+                var storeParam = obj.value ? selectionType + '/' + obj.value + '/' : '';
+                if(obj.switchParams){
+                    storeParam+= obj.switchParams;
+                }
+                var formParam = new Array('period_date_from', 'period_date_to', 'report_period');
+                var paramURL = '';
+                var switchURL = '<?php echo $this->getAbsoluteGridUrl(array('_current' => false)); ?>'.replace(/(store|group|website)\/\d+\//,'');
+
+                for(var i=0;i<formParam.length;i++){
+                    if ($(formParam[i]).value && $(formParam[i]).name) {
+                        paramURL+= $(formParam[i]).name + '=' + escape($(formParam[i]).value) + '&';
+                    }
+                }
+                setLocation(switchURL + storeParam + '?' + paramURL);
+            }
+            //-->
+        </script>        
+
+    <?php endif; ?>
+<?php endif; ?>

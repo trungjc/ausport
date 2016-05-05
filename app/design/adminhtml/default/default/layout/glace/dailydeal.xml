@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+        <reference name="head">
+        	<action method="addItem"><type>skin_js</type><name>glace_dailydeal/font/js/google_font.js</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>glace_dailydeal/font/font_awesome/css/font-awesome.min.css</name><params/></action>
+        	<action method="addCss"><name>glace_dailydeal/font/css/styles.css</name></action>
+        </reference>
+    </default>
+    <dailydeal_adminhtml_dealitems_index>
+        <reference name="content">
+        	<block type="core/template" name="logo" template="glace_dailydeal/logo.phtml" before="-"/>
+            <block type="dailydeal/adminhtml_dealitems" name="dealitems" />
+        </reference>
+    </dailydeal_adminhtml_dealitems_index>
+    
+    <dailydeal_adminhtml_dealitems_edit>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>glace_dailydeal/css/admin.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>glace_dailydeal/js/form_deal.js</name>
+            </action>
+        </reference>
+    </dailydeal_adminhtml_dealitems_edit>
+    
+    <dailydeal_adminhtml_dailyschedule_days>
+        <reference name="content">
+        	<block type="core/template" name="logo" template="glace_dailydeal/logo.phtml" before="-"/>
+            <block type="dailydeal/adminhtml_dailyschedule" name="dailyschedule" ></block>
+        </reference>
+    </dailydeal_adminhtml_dailyschedule_days>
+    
+    <dailydeal_adminhtml_dealscheduler_index>
+        <reference name="content">
+        	<block type="core/template" name="logo" template="glace_dailydeal/logo.phtml" before="-"/>
+            <block type="dailydeal/adminhtml_dealscheduler" name="dealscheduler" ></block>
+        </reference>
+    </dailydeal_adminhtml_dealscheduler_index>
+    
+    <dailydeal_adminhtml_dealscheduler_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>glace_dailydeal/js/form_deal_scheduler.js</name>
+            </action>
+        </reference>
+    </dailydeal_adminhtml_dealscheduler_edit>
+    
+    <dailydeal_adminhtml_dealscheduler_product>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="dailydeal/adminhtml_dealscheduler_edit_product_grid" name="dealscheduler_edit_product_grid"/>
+            <block type="adminhtml/widget_grid_serializer" name="upsell_grid_serializer">
+                <reference name="upsell_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>dealscheduler_edit_product_grid</grid_block_name>
+                        <data_callback>data_callback</data_callback>
+                        <hidden_input_name>links[upsell]</hidden_input_name>
+                        <reload_param_name>products_upsell</reload_param_name>
+                    </action>
+                    <action method="addColumnInputName">
+                        <input_name>deal_time</input_name>
+                        <input_name>deal_price</input_name>
+                        <input_name>deal_qty</input_name>
+                        <input_name>deal_position</input_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </dailydeal_adminhtml_dealscheduler_product>
+    
+    <dailydeal_adminhtml_dealscheduler_gridproduct>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/adminhtml_dealscheduler_edit_product_grid" name="dealscheduler_edit_product_grid"/>
+        </block>
+    </dailydeal_adminhtml_dealscheduler_gridproduct>
+    
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss"><stylesheet>glace_dailydeal/prototype-color-picker/css/prototype_colorpicker.css</stylesheet></action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>glace_dailydeal/prototype-color-picker/js/prototype_colorpicker.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>glace_dailydeal/js/configuration.js</name>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+</layout>

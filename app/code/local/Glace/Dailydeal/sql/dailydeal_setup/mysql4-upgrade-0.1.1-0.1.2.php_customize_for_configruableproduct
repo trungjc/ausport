@@ -1,0 +1,22 @@
+<?php
+
+$installer = $this;
+
+$installer->startSetup();
+
+$installer->run("
+
+DROP TABLE IF EXISTS {$this->getTable('glace_dailydeal_configurable_product')};
+CREATE TABLE {$this->getTable('glace_dailydeal_configurable_product')} (
+  `config_id` int(11) unsigned NOT NULL auto_increment,
+  `dailydeal_id`	int(11) DEFAULT NULL,
+  `product_sku` varchar(255) DEFAULT NULL,
+  `child_sku` varchar(255) DEFAULT NULL,
+  `child_qty` int(11) NOT NULL DEFAULT '0',
+  `child_sold` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`config_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+    ");
+
+$installer->endSetup(); 

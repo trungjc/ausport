@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_Quickview
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+-->
+<config>
+    <sections>
+        <quickview translate="label">
+            <label>Quick View</label>
+            <tab>belvg</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment>
+                    <![CDATA[
+                            <div style="padding:10px;background-color:#fff;border:1px solid #ddd;margin-bottom:7px;">
+                            This module was developed by <a href="http://www.belvg.com" target="_blank">www.BelVG.com</a>.
+                            For docs & examples refer to the BelVG <a href="http://www.belvg.com" target="_blank">web site</a>.
+                            <br/>We have the largest selections of  <a href="http://store.belvg.com/extensions.html" target="_blank">extensions</a> and <a href="http://store.belvg.com/themes.html" target="_blank">themes</a> on Magento.
+                            </div>
+                    ]]>
+                    </comment>
+                    <fields>
+                        <enabled translate="label comment">
+                            <label>Enabled</label>
+                            <!-- <comment><![CDATA[]]></comment> -->
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+												
+						
+						
+
+                    </fields>
+                </settings>
+				 <frontend translate="label">
+					<label>Frontend</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>111</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+                                        <comment>
+                                          <![CDATA[
+                                                  ]]>
+                                        </comment>
+                                        <fields>
+											 <width translate="label comment">
+												<label>Window Width</label>
+												<!-- <comment><![CDATA[]]></comment> -->
+												<frontend_type>text</frontend_type>                            
+												<sort_order>12</sort_order>
+												<show_in_default>1</show_in_default>
+												<show_in_website>1</show_in_website>
+												<show_in_store>1</show_in_store>
+											</width>
+											 <height translate="label comment">
+												<label>Window Height</label>
+												<!-- <comment><![CDATA[]]></comment> -->
+												<frontend_type>text</frontend_type>                            
+												<sort_order>14</sort_order>
+												<show_in_default>1</show_in_default>
+												<show_in_website>1</show_in_website>
+												<show_in_store>1</show_in_store>
+											</height>
+											 <imagesize translate="label comment">
+												<label>Product Image Size</label>
+												<!-- <comment><![CDATA[]]></comment> -->
+												<frontend_type>text</frontend_type>                            
+												<sort_order>15</sort_order>
+												<show_in_default>1</show_in_default>
+												<show_in_website>1</show_in_website>
+												<show_in_store>1</show_in_store>
+											</imagesize>
+											  <image translate="label comment">
+                                                    <label>Show Product Image</label>
+                                                    <!-- <comment><![CDATA[]]></comment> -->
+                                                    <frontend_type>select</frontend_type>
+                                                    <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                                                    <sort_order>16</sort_order>
+                                                    <show_in_default>1</show_in_default>
+                                                    <show_in_website>1</show_in_website>
+                                                    <show_in_store>1</show_in_store>
+                                            </image>
+                                            <shortdesc translate="label comment">
+                                                    <label>Show Product Short Description</label>
+                                                    <!-- <comment><![CDATA[]]></comment> -->
+                                                    <frontend_type>select</frontend_type>
+                                                    <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                                                    <sort_order>17</sort_order>
+                                                    <show_in_default>1</show_in_default>
+                                                    <show_in_website>1</show_in_website>
+                                                    <show_in_store>1</show_in_store>
+                                            </shortdesc>
+                                             <desc translate="label comment">
+                                                    <label>Show Product Full Description</label>
+                                                    <!-- <comment><![CDATA[]]></comment> -->
+                                                    <frontend_type>select</frontend_type>
+                                                    <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                                                    <sort_order>18</sort_order>
+                                                    <show_in_default>1</show_in_default>
+                                                    <show_in_website>1</show_in_website>
+                                                    <show_in_store>1</show_in_store>
+                                            </desc>
+                                             <addinfo translate="label comment">
+                                                    <label>Show Product Additional Information</label>
+                                                    <!-- <comment><![CDATA[]]></comment> -->
+                                                    <frontend_type>select</frontend_type>
+                                                    <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                                                    <sort_order>19</sort_order>
+                                                    <show_in_default>1</show_in_default>
+                                                    <show_in_website>1</show_in_website>
+                                                    <show_in_store>1</show_in_store>
+                                            </addinfo>
+                                            <ajaxloader translate="label comment">
+                                                    <label>Ajax Loading Picture</label>
+                                                    <!-- <comment><![CDATA[]]></comment> -->
+                                                    <frontend_type>image</frontend_type>
+                                                    <source_model>adminhtml/system_config_source_product_thumbnail</source_model>
+                                                    <backend_model>adminhtml/system_config_backend_image</backend_model>
+                                                    <upload_dir config="system/filesystem/media" scope_info="1">catalog/product/ajaxcart</upload_dir>
+                                                    <base_url type="media" scope_info="1">catalog/product/ajaxcart</base_url>
+                                                    <sort_order>10</sort_order>
+                                                    <show_in_default>1</show_in_default>
+                                                    <show_in_website>1</show_in_website>
+                                                    <show_in_store>1</show_in_store>
+                                            </ajaxloader>
+                                         </fields>
+				</frontend>
+            </groups>
+        </quickview>
+    </sections>
+</config>

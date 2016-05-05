@@ -1,0 +1,70 @@
+<div class="block block-deals-week">
+    <div class="block-content">
+        <ol class="mini-products-list" id="recently-viewed-items">
+<?php 
+$numberactive = (int) Mage::getStoreConfig('dailydeal/general/numberactive') ? (int) Mage::getStoreConfig('dailydeal/general/numberactive') : 3;
+$deals = $this->getData('deals');
+$_taxHelper = Mage::helper('tax');
+$_coreHelper = Mage::helper('core');
+
+$currenttime = Mage::getModel('core/date')->timestamp(time());
+$startdaytime= $this->getData('startdaytime');
+$enddaytime= $this->getData('enddaytime');
+$i = -1;
+foreach ($deals as $deal) {
+    $dealtimestart = strtotime($deal->getStartDateTime());
+    $dealtimeend = strtotime($deal->getEndDateTime());
+
+    if (($dealtimestart < $startdaytime && $dealtimeend > $startdaytime)
+            || ($dealtimestart > $startdaytime && $dealtimestart < $enddaytime)) {
+        
+        if ($currenttime < $dealtimeend) {
+            $i++;
+            if($numberactive <= $i){
+                break;
+            }
+            $_product = Mage::getModel('catalog/product')->load($deal->getProductId());
+            ?>
+
+            <li class="item <?php if ($i==0) echo 'fisrt' ?> <?php if ($i%2==0) echo 'odd' ?>"> 
+                <p class="product-name">
+                    <a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath() ?>"><?php echo $deal->getCurProduct()?></a>
+                </p>
+                <a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+                    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(70); ?>" width="70" height="70" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                </a>
+                <div class="product-details">
+                    <div class="price-box">
+                        <?php if($deal->checkDealPrice($_product)){ ?>
+                        <?php $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>		
+                        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+                        <p class="old-price">
+                            <span class="regular-price">
+                                <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                            </span>
+                        </p>
+                        <p class="special-price">
+                            <span class="price">
+                                <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                            </span>
+                        </p>	
+                    <?php }else{
+                        $deal->setMinPriceFollowProductType($_product);
+                        ?>
+                        <p class="from-price special-price">
+                            <span class="pri-label"><?php echo $this->__('From');?></span>
+                            <span class="price">
+                                <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                            </span>
+                        </p>	
+                    <?php } ?>
+                    </div>
+                </div>
+            </li>
+        <?php }
+    }
+}
+?>
+        </ol>
+    </div>
+</div>

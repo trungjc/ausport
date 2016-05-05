@@ -1,0 +1,176 @@
+<?php
+/*
+  Countdown TimerÂ©, 2012, Bui Trung Chinh
+  Based on the "Count down until any date script" - By JavaScript Kit (www.javascriptkit.com)
+  Email: btchinh2906@gmail.com
+  URL: https://www.facebook.com/chuoixanh
+  Licence : Open Source MIT Licence
+ */
+?>
+<?php
+$timechange = (int) Mage::getStoreConfig('dailydeal/general/timechange');
+$gmtcore = Mage::getSingleton('core/date')->getGmtOffset();
+$numberactive = (int) Mage::getStoreConfig('dailydeal/general/numberactive') ? (int) Mage::getStoreConfig('dailydeal/general/numberactive') : 3;
+?>
+
+<script>
+
+    function listminicart(cellid,tomorrow){
+		
+        var urlpath = '<?php echo $this->getUrl('dailydeal/deal/ajaxdeal') . '?currenttime='; ?>'+tomorrow;	
+        new Ajax.Request(urlpath,{
+            method: "GET",
+            onSuccess:	function(resp){
+                $('cell-'+cellid).addTip(resp.responseText, {style: 'grouped'});
+            }
+        });
+    }
+    
+    function countDownSecond(obj) {
+            
+        if( obj.second > 0){
+            obj.second--;
+            
+            setTimeout(function() {
+                if(obj.callback != ''){
+                    obj.callback(obj);
+                }else{
+                    showTime(obj);
+                }
+            }, 0);
+            
+            setTimeout(function() {
+                countDownSecond(obj);
+            }, 1000);
+        }
+    }
+    
+    function showTime(obj) {
+    
+        var seconds = Math.floor(obj.second);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+        
+        hours %= 24;
+        minutes %= 60;
+        seconds %= 60;
+        
+        var str_days = wrapperTagSpan ( insertOneZero(days) );
+        var str_hours = wrapperTagSpan ( insertOneZero(hours) );
+        var str_minutes = wrapperTagSpan ( insertOneZero(minutes) );
+        var str_seconds = wrapperTagSpan ( insertOneZero(seconds) );
+        
+        if ($(obj.label_day)){
+            if(obj.label_day_value){
+                
+                $(obj.label_day).innerHTML     = obj.label_day_value;
+            }else{
+                $(obj.label_day).innerHTML   = '<?php echo Mage::helper('dailydeal')->__('Days'); ?>';
+            }
+        }
+            
+        if ($(obj.label_hour)) {
+            if(obj.label_hour_value){
+                $(obj.label_hour).innerHTML     = obj.label_hour_value;
+            }else{
+                $(obj.label_hour).innerHTML     = '<?php echo Mage::helper('dailydeal')->__('Hours'); ?>';
+            }
+        }
+            
+        if ($(obj.label_minute)){
+            if(obj.label_minute_value){
+                $(obj.label_minute).innerHTML     = obj.label_minute_value;
+            }else{
+                $(obj.label_minute).innerHTML   = '<?php echo Mage::helper('dailydeal')->__('Minutes'); ?>';
+            }
+        }
+            
+        if ($(obj.label_second)){
+            if(obj.label_second_value){
+                $(obj.label_second).innerHTML     = obj.label_second_value;
+            }else{
+                $(obj.label_second).innerHTML   = '<?php echo Mage::helper('dailydeal')->__('Seconds'); ?>';
+            }
+        }
+            
+        if($(obj.id_day)) $(obj.id_day).innerHTML    = str_days;
+        if($(obj.id_hour)) $(obj.id_hour).innerHTML    = str_hours;
+        if($(obj.id_minute)) $(obj.id_minute).innerHTML    = str_minutes;
+        if($(obj.id_second)) $(obj.id_second).innerHTML    = str_seconds;
+            
+        if(days <= 0){
+            if ($(obj.label_day)) $(obj.label_day).innerHTML     = '';
+            if($(obj.id_day)) $(obj.id_day).innerHTML    = '';
+        }
+    }
+    
+    function insertOneZero(value) {
+        var result = '';
+            
+        if(value < 10){
+            result += '0' + value;
+        }else{
+            result += value;
+        }
+        
+        return result;
+    }
+    
+    function wrapperTagSpan(string) {
+        var result = '';
+        
+        string.toString();
+        
+        for(var i=0; i<string.length; i++) {
+            result += "<span>" + string.charAt(i)+"</span>";
+        }
+
+        return result;
+    }
+
+</script>
+
+
+<?php
+if(!function_exists("colourBrightness")) {
+    function colourBrightness($hex, $percent) {
+    $hash = '';
+    if (stristr($hex,'#')) {
+        $hex = str_replace('#','',$hex);
+        $hash = '#';
+    }
+    /// HEX TO RGB
+    $rgb = array(hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2)));
+    //// CALCULATE
+    for ($i=0; $i<3; $i++) {
+        // See if brighter or darker
+        if ($percent > 0) {
+            // Lighter
+            $rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1-$percent));
+        } else {
+            // Darker
+            $positivePercent = $percent - ($percent*2);
+            $rgb[$i] = round($rgb[$i] * $positivePercent) + round(0 * (1-$positivePercent));
+        }
+        // In case rounding up causes us to go to 256
+        if ($rgb[$i] > 255) {
+            $rgb[$i] = 255;
+        }
+    }
+    //// RBG to Hex
+    $hex = '';
+    for($i=0; $i < 3; $i++) {
+        // Convert the decimal digit to hex
+        $hexDigit = dechex($rgb[$i]);
+        // Add a leading zero if necessary
+        if(strlen($hexDigit) == 1) {
+        $hexDigit = "0" . $hexDigit;
+        }
+        // Append to the hex string
+        $hex .= $hexDigit;
+    }
+    return $hash.$hex;
+    }
+}
+?>

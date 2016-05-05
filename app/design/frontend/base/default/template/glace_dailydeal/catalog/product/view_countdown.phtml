@@ -1,0 +1,132 @@
+<?php //product_detail ?>
+<?php $_helper = $this->helper('catalog/output'); ?> 
+<?php $_product = $this->getData('product');?>
+<div style="clear:both;"></div>
+<?php
+$currenttime = date('Y-m-d H:i:s', Mage::getModel('core/date')->timestamp(time()));
+$_deal = Mage::getModel('dailydeal/dailydeal')->getCollection()->loadcurrentdeal($_product->getId());
+if ($_deal) {
+    Glace_Dailydeal_Model_Business::increateFeaturedView($_deal->getId());
+    $title = Mage::getStoreConfig('dailydeal/general/productdetaillabel');
+    $gmtcore = Mage::getSingleton('core/date')->getGmtOffset(); //var_dump($gmtcore*1000);die;
+    $currenttime = Mage::getModel('core/date')->timestamp(time()); //var_dump($_deal->getEndDateTime());
+    $beforetime = $currenttime - strtotime($_deal->getStartDateTime());
+    $aftertime = strtotime($_deal->getEndDateTime()) - $currenttime;
+    $timechange = (int) Mage::getStoreConfig('dailydeal/general/timechange');
+    $dealqty = $_deal->getDealQty();
+    $soldqty = $_deal->getSoldQty();
+?>
+
+	<?php
+    if (Mage::helper('dailydeal')->getConfigIsShowImageCatalogList()) {
+        $url = Mage::helper('dailydeal')->getUrlImageCatalogList();
+        ?>
+        <img class="glacedld_img_sale" src ="<?php echo $url ?>" alt="<?php echo $this->__('sale');?>"/>
+    <?php } ?>
+
+
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('glace_dailydeal/css/superneat.css') ?>" type="text/css" media="all"/>
+
+<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?>
+   
+    <div class="deal-product">
+        <div class="catalogproductview">
+            <?php if ($title == '') { ?>
+                <h3><?php echo $this->__('Get it before it&acute;s gone!'); ?></h3>
+            <?php } else { ?>
+                <h3><?php echo $title; ?></h3>
+            <?php } ?>
+        </div>
+        <div class="ct-deal-pro">
+            <!-- Countdown Javascript -->
+            <div id="counter" class="counter">
+                <ul class="countdown">
+                    <li class="first">
+                        <div class="countdown_num" id="view_cd_day-<?php echo $_deal->getDailydealId() ?>"></div><div id="day"></div>
+					</li>
+                    <li>
+                        <div class="countdown_num" id="view_cd_hour-<?php echo $_deal->getDailydealId() ?>"></div><div id="hour"></div>
+					</li>
+                    <li>
+                        <div class="countdown_num" id="view_cd_min-<?php echo $_deal->getDailydealId() ?>"></div><div id="minute"></div>
+					</li>
+                    <li class="last">
+                        <div class="countdown_num" id="view_cd_sec-<?php echo $_deal->getDailydealId() ?>"></div><div id="second"></div>
+					</li>
+                </ul>
+            </div>
+            <div id="expired" style="display:none;">
+                <?php echo Mage::helper('dailydeal')->__('The deadline has passed.'); ?>
+            </div>
+            <script type="text/javascript">
+                <?php 
+                    $remain_second = strtotime($_deal->getEndDateTime()) - Mage::getModel('core/date')->timestamp();
+                ?>
+                var product_detail_server_time = {
+                    second : <?php echo $remain_second; ?>,
+                    callback : '',
+                    
+                    id_day  : 'view_cd_day-' + <?php echo $_deal->getId(); ?>,
+                    id_hour  : 'view_cd_hour-' + <?php echo $_deal->getId(); ?>,
+                    id_minute  : 'view_cd_min-' + <?php echo $_deal->getId(); ?>,
+                    id_second  : 'view_cd_sec-' + <?php echo $_deal->getId(); ?>,
+                    
+                    label_day : 'day',
+                    label_hour : 'hour',
+                    label_minute : 'minute',
+                    label_second : 'second'
+                };
+                countDownSecond(product_detail_server_time);
+            </script>     
+            <div class="clear"><span>&nbsp;</span></div>
+            
+            
+			<?php if ( $_deal->checkDealQtyToShow($_product) && 
+                    ( Mage::helper('dailydeal')->getConfigTodayDealShowDetail() || Mage::helper('dailydeal')->getConfigDisplayQuantity())) { ?>
+            <div class="qty-deal">
+                
+                
+                
+                <?php if (Mage::helper('dailydeal')->getConfigTodayDealShowDetail()) {
+						$_deal->processValueDiscountSaveBought(array('model_product' => $_product));
+						$_deal_info = $_deal->getData('value_discount_save_bought');?>
+						<div class="glace_dld_detail">
+							<ul>
+								<li>
+									<span><?php echo Mage::helper('dailydeal')->__('Discount') ?></span>
+									<span class="glace_dld_detail_num"><?php echo $_deal_info['discount'] ?></span>
+								</li>
+								<li>
+									<span><?php echo Mage::helper('dailydeal')->__('You Save') ?></span>
+									<span class="glace_dld_detail_num"><?php echo $_deal_info['you_save'] ?></span>
+								</li>
+								<li>
+									<span><?php echo Mage::helper('dailydeal')->__('Bought') ?></span>
+									<span class="glace_dld_detail_num"><?php echo $_deal_info['bought'] ?></span>
+								</li>
+							</ul>
+						</div>
+                <?php } ?>
+                        
+                        
+                <?php if (Mage::helper('dailydeal')->getConfigDisplayQuantity()) { ?>
+						<span>
+							<?php
+							if (($dealqty - $soldqty) > 10) {
+								echo Mage::helper('dailydeal')->renderDealQtyOnProductPage($dealqty - $soldqty);
+							} elseif (($dealqty - $soldqty) <= 10 && ($dealqty - $soldqty) > 1) {
+								echo Mage::helper('dailydeal')->renderDealQtyOnProductPage($dealqty - $soldqty);
+							} elseif (($dealqty - $soldqty) == 1) {
+								echo Mage::helper('dailydeal')->renderDealQtyOnProductPage($dealqty - $soldqty);
+							}
+							?>
+						</span>                        
+                <?php } ?>
+                
+                </div>
+			<?php } ?>
+        </div>					
+	</div>
+<?php } ?>

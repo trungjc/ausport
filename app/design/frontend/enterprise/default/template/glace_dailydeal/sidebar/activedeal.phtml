@@ -1,0 +1,148 @@
+<?php 
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+$numberactive = (int) Mage::getStoreConfig('dailydeal/general/numberactive') ? (int) Mage::getStoreConfig('dailydeal/general/numberactive') : 3;
+$_activedealsCollection = $this->getActivedeals();
+$_collectionSize = count($_activedealsCollection);
+if ($_collectionSize > 0):
+    $count = 0;
+    ?>
+		<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+		<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+		<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?> 
+		<?php
+			function colourBrightness_Active($hex, $percent) {
+			$hash = '';
+			if (stristr($hex,'#')) {
+				$hex = str_replace('#','',$hex);
+				$hash = '#';
+			}
+			/// HEX TO RGB
+			$rgb = array(hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2)));
+			//// CALCULATE
+			for ($i=0; $i<3; $i++) {
+				// See if brighter or darker
+				if ($percent > 0) {
+					// Lighter
+					$rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1-$percent));
+				} else {
+					// Darker
+					$positivePercent = $percent - ($percent*2);
+					$rgb[$i] = round($rgb[$i] * $positivePercent) + round(0 * (1-$positivePercent));
+				}
+				// In case rounding up causes us to go to 256
+				if ($rgb[$i] > 255) {
+					$rgb[$i] = 255;
+				}
+			}
+			//// RBG to Hex
+			$hex = '';
+			for($i=0; $i < 3; $i++) {
+				// Convert the decimal digit to hex
+				$hexDigit = dechex($rgb[$i]);
+				// Add a leading zero if necessary
+				if(strlen($hexDigit) == 1) {
+				$hexDigit = "0" . $hexDigit;
+				}
+				// Append to the hex string
+				$hex .= $hexDigit;
+			}
+			return $hash.$hex;
+		}
+		?>
+
+		<style type="text/css">
+			.block-deals{ box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>; -moz-box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>; -webkit-box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>}
+			.block-deals .block-title-act{ background-color: <?php echo $_dld_color_title; ?>; background-image: linear-gradient(to bottom, <?php echo colourBrightness_Active($_dld_color_title,0.9);?>, <?php echo colourBrightness_Active($_dld_color_title,-0.7);?>); background-image: -webkit-linear-gradient(to bottom, <?php echo colourBrightness_Active($_dld_color_title,0.9);?>, <?php echo colourBrightness_Active($_dld_color_title,-0.7);?>); background-image:    -moz-linear-gradient(to bottom, <?php echo colourBrightness_Active($_dld_color_title,0.9);?>, <?php echo colourBrightness_Active($_dld_color_title,-0.7);?>);	background-image:     -ms-linear-gradient(to bottom, <?php echo colourBrightness_Active($_dld_color_title,0.9);?>, <?php echo colourBrightness_Active($_dld_color_title,-0.7);?>); background-image:      -o-linear-gradient(to bottom, <?php echo colourBrightness_Active($_dld_color_title,0.9);?>, <?php echo colourBrightness_Active($_dld_color_title,-0.7);?>);}	
+			.block-deals .block-content{background: <?php echo colourBrightness_Active($_dld_color_title,0.1);?>}
+			.block-deals li.odd{background: <?php echo colourBrightness_Active($_dld_color_title,0.1);?>}
+			.block-deals .block-content p.product-name a{color: <?php echo colourBrightness_Active($_dld_color_title,-0.7);?>;}
+			.block-deals .special-price .price{color: <?php echo $_dld_color_lighight;?>}
+			.dailydeal-qty-box .deal-qty{color: <?php echo $_dld_color_lighight;?>}
+			.block-deals .actions a{color: <?php echo $_dld_color_title; ?>;}
+			.block-deals button.button span{background: <?php echo $_dld_color_title; ?>; border: 1px solid <?php echo $_dld_color_title; ?>;}
+			.block-deals button.button span span{background: none; border: 0px none;}
+			.block-deals{border: 1px solid <?php echo $_dld_color_title; ?>\9;}
+		</style>
+    <div class="block block-deals" >
+        <div class="block-title-act">
+            <strong><span><?php echo $this->__('Active Deals'); ?></span></strong>
+        </div>
+        <div class="block-content">
+            <ol id="recently-viewed-items" class="mini-products-list">
+                <?php
+                foreach ($_activedealsCollection as $_activedeal) {
+                    $dealqty = $_activedeal->getDealQty();
+                    $soldqty = $_activedeal->getSoldQty();
+                    $_product = Mage::getModel('catalog/product')->load($_activedeal->getProductId());
+                    ?>
+                    <?php if ($count != $numberactive) { ?>		
+                        <li class="item">
+							<p class="product-name">
+								<a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath() ?>" title="<?php echo $_product->getName() ?>">
+									<?php echo $_product->getName() ?>
+								</a>
+							</p>
+                             <a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+								<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(70); ?>" width="70" height="70" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+							</a>					
+                            <div class="product-details">
+                                <div class="price-box">
+                                    
+                                    <?php if($_activedeal->checkDealPrice($_product)){ ?>
+                                    
+                                        <?php $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>		
+                                        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+                                        <p class="old-price">
+                                            <span class="regular-price">
+                                                <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                                            </span>
+                                        </p>
+                                        <p class="special-price">
+                                            <span class="price">
+                                                <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                                            </span>
+                                        </p>	
+                                        
+                                    <?php }else{ 
+                                        $_activedeal->setMinPriceFollowProductType($_product);
+                                        ?>
+                                        <p class="from-price special-price">
+											<span class="pri-label"><?php echo $this->__('From');?></span>
+                                            <span class="price">
+                                                <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                                            </span>
+                                        </p>	
+                                    <?php } ?>
+                                </div>
+								<button type="button" class="button btn-buynow" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>')"><span><?php echo $this->__('Buy now') ?></span></button>
+                            </div>
+                            <div class="dailydeal-qty-box daily-qty-box-active">
+                                <?php if ($_activedeal->checkDealQtyToShow($_product) && Mage::helper('dailydeal')->getConfigDisplayQuantity()) { ?>
+                                    <?php
+                                    if (($dealqty - $soldqty) > 10) {
+
+                                        echo Mage::helper('dailydeal')->__('Hurry, just <span class="deal-qty">%s items</span> available.', $dealqty - $soldqty);
+                                    } elseif (($dealqty - $soldqty) <= 10 && ($dealqty - $soldqty) > 1) {
+
+                                        echo Mage::helper('dailydeal')->__('Hurry, just <span class="deal-qty">%s items</span> left!', $dealqty - $soldqty);
+                                    } elseif (($dealqty - $soldqty) == 1) {
+                                        echo Mage::helper('dailydeal')->__('Hurry, just <span class="deal-qty">%s item</span> left!', $dealqty - $soldqty);
+                                    }
+                                    ?>
+                                <?php } ?>
+                            </div>
+                        </li>
+                        <?php $count++; ?>
+                    <?php } ?>
+                <?php } ?>
+            </ol>
+            <script type="text/javascript">decorateList('recently-viewed-items');</script>
+            <div class="actions">
+                <a style="float: right;" href="<?php echo Mage::helper('dailydeal')->getUrlHttp('dailydeal/index', true); ?>"><?php echo Mage::helper('dailydeal')->__('View all'); ?></a>
+
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+

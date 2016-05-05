@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * BelVG LLC.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ *
+ /***************************************
+ *         MAGENTO EDITION USAGE NOTICE *
+ *****************************************/
+ /* This package designed for Magento COMMUNITY edition
+ * BelVG does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * BelVG does not provide extension support in case of
+ * incorrect edition usage.
+ /***************************************
+ *         DISCLAIMER   *
+ *****************************************/
+ /* Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future.
+ *****************************************************
+ * @category   Belvg
+ * @package    Belvg_Quickview
+ * @copyright  Copyright (c) 2010 - 2011 BelVG LLC. (http://www.belvg.com)
+ * @license    http://store.belvg.com/BelVG-LICENSE-COMMUNITY.txt
+ */
+-->
+<config>
+    <modules>
+        <Belvg_Quickview>
+            <version>1.0.1</version>
+        </Belvg_Quickview>
+    </modules>
+    <frontend>
+        <routers>
+            <quickview>
+                <use>standard</use>
+                <args>
+                    <module>Belvg_Quickview</module>
+                    <frontName>quickview</frontName>
+                </args>
+            </quickview>
+        </routers>
+        <layout>
+            <updates>
+                <quickview>
+                    <file>quickview.xml</file>
+                </quickview>
+            </updates>
+        </layout>
+    </frontend>
+    <global> 
+        <helpers>
+            <quickview>
+                <class>Belvg_Quickview_Helper</class>
+            </quickview>
+        </helpers>    
+        <blocks>   
+           <quickview>
+			    <class>Belvg_Quickview_Block</class>
+		    </quickview>
+        </blocks>        
+    </global>  
+	<default>
+		<quickview>
+			<settings>
+				<enabled>0</enabled>
+			</settings>				
+			<frontend>	
+				<width>680</width>
+				<height>500</height>
+				<imagesize>250</imagesize>				
+			</frontend>			
+		</quickview>
+	</default>	
+</config> 

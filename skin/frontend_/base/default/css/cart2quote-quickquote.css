@@ -1,0 +1,138 @@
+/**
+ *
+ * CART2QUOTE CONFIDENTIAL
+ * __________________
+ *
+ *  [2009] - [2015] Cart2Quote B.V.
+ *  All Rights Reserved.
+ *
+ * NOTICE OF LICENSE
+ *
+ * All information contained herein is, and remains
+ * the property of Cart2Quote B.V. and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Cart2Quote B.V.
+ * and its suppliers and may be covered by European and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Cart2Quote B.V.
+ *
+ * @category    Ophirah
+ * @package     Qquoteadv
+ * @copyright   Copyright (c) 2015 Cart2Quote B.V. (http://www.cart2quote.com)
+ * @license     http://www.cart2quote.com/ordering-licenses
+ */
+
+#quickQuoteWrapper,
+#quickQuoteBack {
+    z-index: 1400;
+}
+
+#quickQuoteWrapper{
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+}
+
+#quickQuoteBack {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#quickQuote {
+    top: 0;
+    background-color: #FFFFFF;
+    padding: 20px;
+    position: absolute;
+    z-index: 1550;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 2px solid #ededed;
+}
+
+@media (max-width:770px){
+    #quickQuote{
+        left: 5%;
+        right: 5%;
+    }
+}
+
+@media (min-width:770px ) and  (max-width:975px ){
+    #quickQuote{
+        left: 15%;
+        right: 15%;
+        max-width: 70%;
+    }
+}
+
+@media (min-width:975px) {
+    #quickQuote{
+        left: 35%;
+        right: 35%;
+        max-width: 30%;
+    }
+}
+
+#quickQuote .qquote-client-collaterals {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+#quickQuoteBack {
+    top: 0;
+    background-color: #333;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    -khtml-opcaity: 0.8;
+    opacity: 0.8;
+    z-index: 1500;
+}
+
+#quickQuote td {
+    width: 50%;
+    padding: 0px 2px;
+}
+
+#quickQuote input,
+#quickQuote textarea,
+#quickQuote select {
+    width: 100%;
+    min-width: 125px;
+}
+
+.quickQuote textarea {
+    display: inline-block;
+    min-width: 150px;
+}
+
+.quickQuote input[type='text'] {
+    width: 80%;
+    margin-bottom: 2px;
+    float: left;
+
+}
+
+#quickQuote .close-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: -7px -7px 0 0;
+}
+
+#quickQuote .close-icon img {
+    width: 25px;
+    height: 25px;
+}
+
+#quickQuote .close-icon img:hover {
+    cursor: pointer;
+}

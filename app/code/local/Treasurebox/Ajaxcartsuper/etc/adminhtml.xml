@@ -1,0 +1,39 @@
+<?xml version="1.0"?> 
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<ajaxcartsuper>
+										<title>Ajaxcart Super</title>
+									</ajaxcartsuper>
+								</children>
+							</config>
+						</children>
+					</system>	
+					<treasurebox translate="title" module="ajaxcartsuper">
+						<title>KSV Treasurebox</title>
+						<sort_order>71</sort_order>               
+						<children>
+							<ajaxcartsuper translate="title" module="ajaxcartsuper">
+								<title>Super Ajaxcart</title>
+								<sort_order>0</sort_order>
+								<children>
+									<configuration>
+										<title>Configuration</title>
+										<sort_order>1</sort_order>
+										<action>adminhtml/system_config/edit/section/ajaxcartsuper</action>
+									</configuration>
+								</children>
+							</ajaxcartsuper>
+						</children>
+					</treasurebox>					
+				</children>
+			</admin>
+        </resources>
+	</acl>
+</config>

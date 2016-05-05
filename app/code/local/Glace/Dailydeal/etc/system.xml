@@ -1,0 +1,313 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <glace module="dailydeal">
+            <label><![CDATA[<i class="fa fa-bolt fa-2x"></i> <i class="glace">GLACE EXTENSIONS</i>]]></label>
+            <sort_order>100</sort_order>
+        </glace>
+    </tabs>
+    <sections>
+        <!-- ten module ko dc dat kem ten namespace o trc-->
+        <dailydeal translate="label" module="dailydeal">
+            <label><![CDATA[<i class="glace">Daily Deal</i>]]></label>
+            <tab>glace</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            	<info translate="label">
+				      <label><![CDATA[<i class="fa fa-bolt"></i> <i class="glace">CMS IDEAS</i>]]></label>
+				      <frontend_type>text</frontend_type> 
+				      <sort_order>999999</sort_order>
+				      <show_in_default>1</show_in_default>
+				      <show_in_website>1</show_in_website>
+				      <show_in_store>1</show_in_store> 
+				      <comment><![CDATA[<i class="glace">Daily Deal V2.0 - Extension powered by <a href="http://www.cmsideas.net" target="_blank" style='text-decoration: none'><font color="#EF1313">CMS IDEAS</font></a>.<br/><br/>]]>Visit our website: <![CDATA[<a href="http://www.cmsideas.net" target="_blank" style='text-decoration: none'><font color="#EF1313">wwww.cmsideas.net</font></a>]]> to view more themes and extension required for your magento store.<![CDATA[<br/><br/>]]> Write ticket and get support from our at: <![CDATA[<a href="http://support.cmsideas.net/" target="_blank" style='text-decoration: none'><font color="#EF1313">Technical Support - Forum</font></a>.</i>]]>  </comment>  
+				</info>
+                <general translate="label" module="dailydeal">
+                    <label><![CDATA[<i class="fa fa-bolt"></i> <i class="glace">Settings</i>]]></label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                 
+                    <fields>
+                        <enabled translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Enable Daily Deal</i>]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <!--
+                        <lable_deal_block translate="label">
+                            <frontend_type>label</frontend_type>	
+                            <frontend_model>dailydeal/adminhtml_system_config_dealblock</frontend_model>	
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lable_deal_block>
+                        -->
+                        <sidebardeal translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Show Today's Deal block at</>]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dailydeal/source_sidebar</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sidebardeal>
+                        <calendar translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Show Deals of Week block at</i>]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dailydeal/source_sidebar</source_model>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </calendar>
+                        <sidebaractive translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Show Active Deals block at</i>]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dailydeal/source_sidebar</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sidebaractive>
+                        <!--
+                        <lable_deal_display translate="label">
+                            <frontend_type>label</frontend_type>	
+                            <frontend_model>dailydeal/adminhtml_system_config_dealdisplay</frontend_model>	
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lable_deal_display>
+                        -->
+                        <numberactive translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Number deals to display at 'Active Deal' and 'Deals of the Week' Block</i>]]></label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-greater-than-zero</validate>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </numberactive>
+                        <sort_by translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Deal Display Method</i>]]></label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>dailydeal/source_sortby</source_model>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_by>
+                        <today_deal_show_detail translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Show deal details (Discount, You Save, Bought)</i>]]></label>
+                            <comment>Deal details will be shown on Today's Deal block and Daily Deal product page</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </today_deal_show_detail>
+                        <showqty translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Display Remaining Deal Quantity</i>]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showqty>
+                        <catalog_list_show_image translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Show 'sale' label on product/category page</i>]]></label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </catalog_list_show_image>
+                        <label_image>
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Custom 'Sale Label' Image</i>]]></label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">glace_dailydeal</upload_dir>
+                            <base_url type="media" scope_info="1">glace_dailydeal</base_url>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </label_image>
+                        <!--
+                        <product_view_show_countdown translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Extend Product Page to show countdown timer</i>]]></label>
+                            <comment>Only set Yes if there is no other module extends product page to avoid conflict</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_show_countdown>
+                        -->
+                        <!--
+                        <lable_deal_layout translate="label">
+                            <frontend_type>label</frontend_type>	
+                            <frontend_model>dailydeal/adminhtml_system_config_deallayout</frontend_model>	
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            </lable_deal_layout>
+                        -->
+                        <deallayout translate="label">
+                            <frontend_type>select</frontend_type>
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i><i class="glace">Daily Deal Page Layout</i>]]></label>
+                            <source_model>Mage_Page_Model_Source_Layout</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </deallayout>
+                        <columncount translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i><i class="glace">Number of Products per Row on Daily Deal Page</i>]]></label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-greater-than-zero</validate>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </columncount>
+                        <!--
+                        <lable_deal_message translate="label">
+                            <frontend_type>label</frontend_type>	
+                            <frontend_model>dailydeal/adminhtml_system_config_dealmessage</frontend_model>	
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            </lable_deal_message>
+                        -->
+                        <title translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Title Sidebar "Today's Deal"</i>]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <productdetaillabel translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Countdown Timer Title</i>]]></label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </productdetaillabel>
+                        <deal_qty_on_product_page translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Remaining Deal Quantity Message on Product Page:</i>]]></label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </deal_qty_on_product_page>
+                        <deal_qty_on_catalog_page translate="label">
+                            <label><![CDATA[<i class="fa fa-thumbs-up"></i> <i class="glace">Remaining Deal Quantity Message on Deal Blocks and Categories Page:</i>]]></label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </deal_qty_on_catalog_page>
+                        
+                        <button_reset_message_deal_qty translate="label">
+                            <frontend_type>label</frontend_type>	
+                            <frontend_model>dailydeal/adminhtml_system_config_messagequantity</frontend_model>	
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </button_reset_message_deal_qty>
+                        
+                        <!--
+                        <lable_deal_color translate="label">
+                            <frontend_type>label</frontend_type>	
+                            <frontend_model>dailydeal/adminhtml_system_config_dealcolor</frontend_model>	
+                            <sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </lable_deal_color>
+                        <schemecolor translate="label">
+                            <label>Color Scheme - General</label>
+                            <comment>Choose color (Scroll over vertical bar, then move circle to desired color in left hand box, save setting with ball in lower right corner)</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>24</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </schemecolor>
+                        <countdowncolor translate="label">
+                            <label>Countdown Timer Color</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </countdowncolor>
+                        <highlight_color translate="label">
+                            <label>Highlight Color for 'price/discount/items left'</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </highlight_color>
+                        -->
+                    </fields>
+                </general>
+                <!--
+                <admin_notification translate="label">
+                    <label>Admin Notification</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <notify_admin  translate="label">
+                            <label>Notify Admin when no deals are active</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notify_admin>
+                        <admin_email  translate="label">
+                            <label>Admin email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </admin_email>
+      
+                    </fields>
+                </admin_notification>
+                -->
+            </groups>
+        </dailydeal>
+    </sections>
+</config>

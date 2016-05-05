@@ -1,0 +1,142 @@
+
+/*===Belvg 30.09.11====*/
+
+   
+.quickview-hider {
+	background: none repeat scroll 0 0 #333333;
+	display: block;
+	left: 0;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); 
+	-moz-opacity: 0.5; 
+	-khtml-opacity: 0.5;
+	opacity: 0.5; 
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 9998;
+}
+.popup {
+	background: none repeat scroll 0 0 #FFFFFF;
+	padding:10px;
+}
+.quickview-button {
+	background: url("../images/quickview-button.png") no-repeat scroll 0 0 transparent;
+	border-radius: 4px 4px 4px 4px;
+	color: #FFFFFF !important;
+	font-size: 0;
+	font-weight: bold;
+	height: 30px;
+	left: 20px;
+	padding: 10px 56px;
+	position: absolute;
+	text-decoration: none !important;
+	top: -80px;
+}
+
+.quickview-loader {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #FB9C57;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	height: 15px;
+	left: 52%;
+	margin-left: -25px;
+	margin-top: -25px;
+	opacity: 0.8;
+	padding: 10px;
+	position: fixed;
+	top: 46%;
+	width: 15px;
+	z-index: 9999;
+}
+.quickview-popup {
+	background: none repeat scroll 0 0 #FFFFFF;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+    -webkit-box-shadow: 0 6-webkit-box-shadow: 0 6px 10px rgba( 0, 0, 0, 0.3 );
+	-moz-box-shadow:    0 6px 10px rgba( 0, 0, 0, 0.3 );
+	box-shadow:         0 6px 10px rgba( 0, 0, 0, 0.3 );
+	left: 50%;
+	margin-left: -275px;
+	margin-top: -170px;
+	padding: 10px;
+	position: absolute;
+	width: 700px;
+	z-index: 9999;
+}
+.quickview-hider {
+	display: block;
+	left: 0;
+	opacity: 0.8;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 9997;
+}
+.popup {
+	position: relative;
+}
+.popup-header {
+	margin-top: -20px;
+	position: absolute;
+	right: 0;
+	z-index: 9999;
+}
+.popup-header a {
+	background: url("../images/close.png") no-repeat scroll 0 0 transparent;
+	left: 19px;
+	padding: 10px 16px;
+	position: relative;
+}
+.main-popup {
+	padding: 5px 5px 20px;
+}
+.main-popup h2 a {
+	text-decoration: none;
+}
+.main-popup .product-shop {
+	float: right;
+	position: relative;
+	width: 335px;
+}
+.main-popup .product-img-box {
+	float: left;
+	text-align: center;
+	width: 250px;
+}
+.main-popup .product-img-box img {
+	border:1px solid #999;
+}
+.main-popup .product-name h1 a {
+	color: #6F7070;
+	font-family: arial;
+	font-size: 27px;
+	font-weight: normal;
+	line-height: 17px;
+	margin: 0;
+	text-decoration:none;
+}
+.main-popup .product-name h1 a:hover {
+	text-decoration:underline;
+}
+.main-popup .product-shop .product-options-bottom {
+	margin:0;
+}
+.main-popup .ratings, .product-options-bottom .rating-links {
+	padding-left:0;
+}
+.main-popup .add-to-box {
+	margin: 20px;
+}
+
+.product-options-bottom {
+	background-color:#fffada;
+	padding:15px 20px;
+	border:1px solid #e4e4e4;
+	height:300px;
+	overflow:auto;
+}

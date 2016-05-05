@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Media Rocks GbR
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled with 
+ * this package in the file MEDIAROCKS-LICENSE-COMMUNITY.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://solutions.mediarocks.de/MEDIAROCKS-LICENSE-COMMUNITY.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package is designed for Magento COMMUNITY edition. 
+ * Media Rocks does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Media Rocks does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please send an email to support@mediarocks.de
+ *
+ */
+-->
+<config>
+    <modules>
+        <Mediarocks_RetinaImages>
+            <version>0.1.3</version>
+        </Mediarocks_RetinaImages>
+    </modules>
+	<frontend>
+        <layout>
+            <updates>
+                <mediarocks_retinaimages>
+                    <file>mediarocks_retinaimages.xml</file>
+                </mediarocks_retinaimages>
+            </updates>
+        </layout>
+	</frontend>
+    <global>
+        <models>
+            <mediarocks_retinaimages>
+                <class>Mediarocks_RetinaImages_Model</class>
+            </mediarocks_retinaimages>
+            <catalog>
+                <rewrite>
+                    <product_image>Mediarocks_RetinaImages_Model_Product_Image</product_image>
+                </rewrite>
+            </catalog>
+        </models>
+        <helpers>
+            <mediarocks_retinaimages>
+                <class>Mediarocks_RetinaImages_Helper</class>
+            </mediarocks_retinaimages>
+        </helpers>
+    </global>
+    
+    <default>
+        <retinaimages>
+            <module>
+                <enabled>1</enabled>
+                <quality>60</quality>
+                <default_quality>90</default_quality>
+            </module>
+       	</retinaimages>
+    </default>
+    
+</config>

@@ -1,0 +1,164 @@
+@CHARSET "ISO-8859-1";
+/*****************************
+	- CONTENT FOOTER -
+******************************/	
+/******************************
+	THE TITLE IN THE HEADER
+*******************************/	
+.title{
+	font-family: 'Istok Web', sans-serif;
+	font-size: 25px;
+	text-align: center;
+}
+.content-head-background{
+	height:120px;
+	width: 330px;
+	top:0px;
+	background:url(images/assets/pattern_body_green.jpg);
+	background-color:#fff;	
+	border-radius: 5px 5px 0px 0px; 
+	-moz-border-radius: 5px 5px 0px 0px; 
+	-webkit-border-radius: 5px 5px 0px 0px;
+	z-index:1;
+}
+.content-foot{
+	/*position:absolute;*/
+	padding-top: -120px;
+	background:url(images/assets/footer_bg.jpg);
+	width:330px;
+	height:200px;	
+	border-radius: 0px 0px 5px 5px; 
+	-moz-border-radius: 0px 0px 5px 5px; 
+	-webkit-border-radius: 0px 0px 5px 5px;
+	z-index:1;
+}/*******************************
+	-	THE FOOTER    -
+********************************/
+#footer {
+	padding: 0px 20px 0;
+	/*background: #1f262c;*/
+	position: relative;
+	overflow: auto;
+}
+
+.footerlogo {
+	background:url(images/standard/sitelogo_bottom.html) no-repeat top left;
+	width: 190px;
+	height: 82px;	
+	float: left;
+	margin-top: 5px;
+	margin-bottom:15px;
+}
+#footer h5, #footer_2 h5{
+	font-family: 'Istok Web', sans-serif;
+	color: #fff;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #3c4147;
+	padding-bottom: 10px;
+}
+
+
+
+
+/* Footer Content inside the Columns */
+#footer .footer_content, #footer_2 .footer_content{
+	margin-bottom: 10px;
+	font-family: 'Istok Web', sans-serif;
+	font-size: 14px;
+	color:#8f9396;
+	text-align: left;
+	line-height: 18px;
+}
+
+/* Special Values for Contact Address*/
+#footer .subheadline, #footer_2 .subheadline{
+	font-family: 'Istok Web', sans-serif;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+
+
+/* Special Values for smaller Text*/
+#footer .subcontent, #footer_2 .subcontent{
+	font-family: 'Istok Web', sans-serif;
+	font-size: 12px;
+	color: #8f9396;
+	padding-bottom: 10px;	
+}
+
+/* Special Values for normal Text*/
+#footer p, #footer_2 p{	
+	color: #8f9396;	
+}
+
+
+/* SPECIAL VALUES FOR SMALLER TEXT FOR LOGO*/
+#footer .logocontent{
+	font-family: 'Istok Web', sans-serif;
+	font-size: 12px;
+	color: #8f9396;
+}
+
+
+/* Footer Get In Touch*/
+
+#footer #address{
+	width: 40%;
+	float: left;
+	height: 100px;
+	padding-left: 20px;
+}
+
+#footer #map{
+	width: 50%;
+	height: 80px;
+	float: left;
+}
+/* Socials in Footer */
+#socials a{
+	float: left;
+	width: 34px;
+	height: 34px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+#socials a:hover{
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	-moz-opacity:1;
+	-khtml-opacity: 1;
+	opacity: 1;
+}
+#socials #facebook{
+	background: url('images/standard/socials/s_1.png') no-repeat left top;
+}
+#socials #twitter_social{
+	background: url('images/standard/socials/s_2.png') no-repeat left top;
+}
+#socials #flickr_social{
+	background: url('images/standard/socials/s_3.png') no-repeat left top;
+}
+#socials #picasa{
+	background: url('images/standard/socials/s_4.png') no-repeat left top;
+}
+#socials #rss{
+	background: url('images/standard/socials/s_5.png') no-repeat left top;
+}
+#socials #linkedin{
+	background: url('images/standard/socials/s_6.png') no-repeat left top;
+}
+#socials #youtube{
+	background: url('images/standard/socials/s_7.png') no-repeat left top;
+}
+#socials #vimeo{
+	background: url('images/standard/socials/s_8.png') no-repeat left top;
+}
+#countdown{float:left; height:95px;}
+.content{padding-bottom:22px;}

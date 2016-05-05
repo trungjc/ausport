@@ -1,0 +1,68 @@
+table.doctable, table.informaltable { 
+   border: 0px;
+	width:100%;
+}
+table.doctable td, table.doctable th, table.doctable caption,
+table.informaltable td, table.informaltable th, table.informaltable caption { 
+   padding: 5px;
+}
+table.doctable thead th, table.informaltable thead th { 
+   background-color: #9999CC;
+}
+table.doctable tbody td, table.informaltable tbody td {
+    border: 1px solid #D7D7D7 !important;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0px;
+}
+table.doctable tbody td span, table.informaltable tbody td span{
+	padding: 4px;
+	display: block;
+	background: #fff;
+	-webkit-border-radius:0px 18px 0px 0px;
+	-moz-border-radius:0px 15px 0px 0px;
+	border-radius:0px 15px 0px 0px;
+}
+
+/*Mini cart*/
+* { margin: 0; padding: 0;}
+*#cart-sidebar{padding:0 !important; margin-top:15px;}
+#container{width:100%; background:#FFFFFE; font: 12px/1.55 Arial,Helvetica,sans-serif; margin:0;}
+.clear_both{clear:both; height:1px; display:block; overflow:hidden;}
+
+.block-deals-cal .left_minicart{float:left; margin-right:10px; width:60px;}
+.block-deals-cal .left_minicart a{margin:5px; display: block;}
+.block-deals-cal .right_minicart{width:400px; float:left;}
+.block-deals-cal .right_minicart a{color: #203548; font-size: 13px; font-weight: bold;}
+.block-deals-cal .left_minicart img{width:53px; height:41px;}
+.select_deal span:hover{color:#000; font-weight:bold; cursor: pointer;}
+#cell { background-color: #F0F0F0;}
+.block-deals-cal {border: 0px none;  -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; box-shadow: 0 0 3px #3B5871; margin: 0 0 15px;} 
+.block-deals-cal .block-title{ background-color: #3b5871; background-image: linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image: -webkit-linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image:    -moz-linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image:     -ms-linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image:      -o-linear-gradient(to bottom, #3b5871, #0A263D); border-radius: 5px 5px 0px 0px; -webkit-border-radius:5px 5px 0px 0px;	-moz-border-radius:5px 5px 0px 0px; border-bottom: 0px none; height: 34px;  overflow: hidden; padding: 0; text-align: center;}
+.block-deals-cal .block-title strong{line-height:34px; padding:0 !important; color: #fff; font-family: verdana,arial; font-size: 17px; font-weight: normal; text-transform: capitalize;}
+
+table.doctable{ border: 0px none; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;}
+
+.select_deal{background:#3B5871; border: 1px solid white !important; font-weight: bold;}
+.select_deal:hover{background:#3B5871; color:#fff; border:1px solid #fff !important;}
+.select_deal:hover span{background:#3B5871; color: #fff;}
+.opentip{-webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; box-shadow: 0 0 5px #3B5871;}
+.ot-container {width:219px !important;} 
+.ot-container .header {-webkit-border-radius:5px 5px 0 0; -moz-border-radius:5px 5px 0 0; border-radius:5px 5px 0 0; background-color: #3b5871; background-image: linear-gradient(to bottom, #3b5871, #0A263D); height: 24px; margin: 0 auto; padding: 0; position: relative; text-align: right; width: auto;    z-index: 10; min-height: 28px;}
+
+.block-deals-week{border:1px solid #D3D3D3; border-bottom: 0px none; border-top: 0px none; text-align: left;}
+.block-deals-week .block-content {background: #fff;}
+.block-deals-week .block-content li.item{border-bottom:1px solid #D3D3D3; padding: 7px 9px;}
+.block-deals-week .block-content li.odd{background: #e7f1f4;}
+.block-deals-week  .block-content p.product-name{margin-bottom: 5px;}
+.block-deals-week .block-content p.product-name a{font-weight: bold; color: #203548; text-decoration: none; font-size: 12px;}
+.block-deals-week .block-content p.product-name a:hover{text-decoration: underline;}
+.block-deals-week  .mini-products-list .product-image{border: 1px solid #d3d3d3; float: left; width: 70px; background:none; padding:0; margin:4px 0px 0px 0px;}
+.block-deals-week  .mini-products-list .product-details {margin-left: 80px; text-align: left;}
+.block-deals-week  .price-box{margin: 0px;}
+.block-deals-week  .old-price .price{color: #999;font-size: 12px; font-weight: bold;}
+.block-deals-week  .special-price .price{color: #ff0000; font-size: 16px; font-weight: bold;}

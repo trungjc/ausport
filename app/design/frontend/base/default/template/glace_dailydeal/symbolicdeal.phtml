@@ -1,0 +1,253 @@
+<?php 
+	$_coreHelper = $this->helper('core');
+	$_taxHelper  = $this->helper('tax');
+	$title = Mage::getStoreConfig('dailydeal/general/title');
+	$_helper = $this->helper('catalog/output');	
+	$_dealCollection = $this->getDeals(); 
+	$_collectionSize = count($_dealCollection);
+	$timechange = (int)Mage::getStoreConfig('dailydeal/general/timechange'); 
+	
+	if ($_collectionSize > 0){
+		foreach ($_dealCollection as $_deal){
+			$dealqty = $_deal->getDealQty();
+			$soldqty = $_deal->getSoldQty();
+			$gmtcore = Mage::getSingleton('core/date')->getGmtOffset();
+			
+			$beforetime = Mage::getModel('core/date')->timestamp(time())-strtotime($_deal->getStartDateTime());//echo $beforetime;
+			$aftertime = strtotime($_deal->getEndDateTime())- Mage::getModel('core/date')->timestamp(time());//echo $aftertime;
+			if (($aftertime > 0) && ($beforetime >= 0)){
+			$_product = Mage::getModel('catalog/product')->load($_deal->getProductId());	
+?>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('glace_dailydeal/symbolic/css/symgeneral.css');?>"/>
+
+<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?> 
+<style type="text/css">
+    .block-todaydeal{ box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>; -moz-box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>; -webkit-box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>}
+    .block-todaydeal .title{ background-color: <?php echo $_dld_color_title; ?>; background-image: linear-gradient(to bottom, <?php echo colourBrightness($_dld_color_title,0.9);?>, <?php echo colourBrightness($_dld_color_title,-0.7);?>); background-image: -webkit-linear-gradient(to bottom, <?php echo colourBrightness($_dld_color_title,0.9);?>, <?php echo colourBrightness($_dld_color_title,-0.7);?>); background-image:    -moz-linear-gradient(to bottom, <?php echo colourBrightness($_dld_color_title,0.9);?>, <?php echo colourBrightness($_dld_color_title,-0.7);?>);	background-image:     -ms-linear-gradient(to bottom, <?php echo colourBrightness($_dld_color_title,0.9);?>, <?php echo colourBrightness($_dld_color_title,-0.7);?>); background-image:      -o-linear-gradient(to bottom, <?php echo colourBrightness($_dld_color_title,0.9);?>, <?php echo colourBrightness($_dld_color_title,-0.7);?>);}	
+    .block-todaydeal .block-content{background: <?php echo colourBrightness($_dld_color_title,0.1);?>}
+    .block-todaydeal .block-content a.product-name{color: <?php echo colourBrightness($_dld_color_title,-0.7);?>}
+    .block-todaydeal .special-price .price{color: <?php echo $_dld_color_lighight;?>}
+    .block-todaydeal .glace_dld_detail ul li span.glace_dld_detail_num{color: <?php echo $_dld_color_lighight;?>}
+    .dailydeal-qty-box .deal-qty{color: <?php echo $_dld_color_lighight;?>}
+    .block-todaydeal .counter ul.countdown li div.countdown_num span{background: <?php echo $_dld_color_coundown; ?>}
+    .block-todaydeal button.button span{background: <?php echo $_dld_color_title; ?>; border: 1px solid <?php echo $_dld_color_title; ?>;}
+    .block-todaydeal button.button span span{background: none; border: 0px none;}
+    .block-todaydeal{border: 1px solid <?php echo $_dld_color_title; ?>\9;}
+</style>
+
+<div class="symbolic_clear">&nbsp;</div>
+
+<div class="deal block block-todaydeal">
+	<div class="deal-title">
+		<h1 class="deal-name" title="<?php echo $_product->getName()?>"><?php echo $_product->getName()?></h1>
+	</div>
+	<div class="deal-info">
+	
+		<div class="deal-info-top">
+			<div class="rightcol">	 					
+				<div class="media">	
+				<img class="image-responsive" id="image" src="<?php echo $this->helper('catalog/image')->init($_product, 'image')?>" alt="<?php $this->htmlEscape($this->getImageLabel())?>" title="<?php $this->htmlEscape($this->getImageLabel())?>" width="420" height="267"/>
+				</div>						
+				<div class="info">	
+					<?php if ($_product->getShortDescription()):?>
+				                <div class="short-description">
+				                    <h2><?php echo Mage::helper('dailydeal')->__('Quick Overview') ?></h2>
+				                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+				                </div>
+				            <?php endif;?>				
+				</div>
+			
+			</div>
+			<div class="leftcol">
+	
+	<?php 
+		$_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice());
+		$_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice());
+		$save = $_regularPrice-$_finalPrice;
+		$discount = ($save/$_regularPrice)*100;
+		
+	?>
+				<div class="content-symbolicdeal">
+	
+					<div class="price_tag">
+						<div class="price_tag_inner">
+							<div class="amount"><?php echo $_coreHelper->currency($_finalPrice,true,false) ?></div>	
+							
+							<div class="btn_buy">
+								<p>
+									<button type="button" title="<?php echo Mage::helper('dailydeal')->__('Buy !') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span>
+										<span><?php echo Mage::helper('dailydeal')->__('Buy !') ?></span></span>
+									</button>
+								</p>								
+							</div>
+						</div>
+					</div>
+					
+                    <?php if (Mage::helper('dailydeal')->getConfigTodayDealShowDetail()) {?>
+				    <div class="deal_discount" class="clearfix">
+						  <dl>
+							<dt><?php echo Mage::helper('dailydeal')->__('Old price'); ?></dt>
+							<dd><?php echo $_coreHelper->currency($_regularPrice,true,false) ?></dd>
+						  </dl>
+						  <dl class="discount">
+							<dt><?php echo Mage::helper('dailydeal')->__('Discount'); ?></dt>
+							<dd><?php echo round($discount,2).'%'?></dd>
+						  </dl>
+						  <dl class="save">
+							<dt><?php echo Mage::helper('dailydeal')->__('You Save'); ?></dt>
+							<dd><?php echo $_coreHelper->currency($save,true,false)?></dd>
+						  </dl>
+						  <div class="clear"></div>
+					</div>
+                    <?php } ?>
+				
+                    <?php if ($_deal->checkDealQtyToShow($_product) && Mage::helper('dailydeal')->getConfigDisplayQuantity()) { ?>
+					<div id="gift_a_deal">
+						<div style="padding-left: 0px;font-size: 11px;">
+									<?php
+									if (($dealqty - $soldqty) > 10) {
+										echo Mage::helper('dailydeal')->renderDealQtyOnCatalogPage($dealqty - $soldqty);
+									} elseif (($dealqty - $soldqty) <= 10 && ($dealqty - $soldqty) > 1) {
+										echo Mage::helper('dailydeal')->renderDealQtyOnCatalogPage($dealqty - $soldqty);
+									} elseif (($dealqty - $soldqty) == 1) {
+										echo Mage::helper('dailydeal')->renderDealQtyOnCatalogPage($dealqty - $soldqty);
+									}
+									?>
+						</div>
+					</div>	
+                    <?php } ?>
+										
+														
+					<div class="remaining_time">
+						<p class="timer_text">
+                            <?php if ($title == '') { ?>
+                                <?php echo $this->__('Get it before it&acute;s gone!'); ?>
+                            <?php } else { ?>
+                                <?php echo $title; ?>
+                            <?php } ?>
+                        
+									<!-- Countdown Javascript -->
+							<div id="symbolic_counter" class="counter">
+								<ul class="countdown">
+									<li class="first"><div class="countdown_num" id="symbolic_day-<?php echo $_deal->getId()?>"></div><div id="sym-day"></div></li>
+									<li><div class="countdown_num" id="symbolic_hour-<?php echo  $_deal->getId()?>"></div><div id="sym-hour"></div></li>
+									<li><div class="countdown_num" id="symbolic_minute-<?php echo  $_deal->getId()?>"></div><div id="sym-minute"></div></li>
+									<li class="last"><div class="countdown_num" id="symbolic_second-<?php echo  $_deal->getId()?>"></div><div id="sym-second"></div></li>
+								</ul>
+								<div class="clear"><span>&nbsp;</span></div>
+							</div>
+								<div id="expired" style="display:none;">
+									The deadline has passed.
+								</div>
+				
+            <?php $remain_second = strtotime($_deal->getEndDateTime()) - Mage::getModel('core/date')->timestamp(); ?>
+            <script type="text/javascript">
+                var sym_server_time = { 
+                    second : <?php echo $remain_second; ?>,
+                    callback : '',
+                    
+                    id_day  : 'symbolic_day-' + <?php echo $_deal->getId(); ?>,
+                    id_hour  : 'symbolic_hour-' + <?php echo $_deal->getId(); ?>,
+                    id_minute  : 'symbolic_minute-' + <?php echo $_deal->getId(); ?>,
+                    id_second  : 'symbolic_second-' + <?php echo $_deal->getId(); ?>,
+                    
+                    label_day : 'sym-day',
+                    label_hour : 'sym-hour',
+                    label_minute : 'sym-minute',
+                    label_second : 'sym-second',
+					
+					label_day_value : '<?php echo Mage::helper('dailydeal')->__('Day'); ?>',
+                    label_hour_value : '<?php echo Mage::helper('dailydeal')->__('Hours'); ?>',
+                    label_minute_value : '<?php echo Mage::helper('dailydeal')->__('Mins'); ?>',
+                    label_second_value : '<?php echo Mage::helper('dailydeal')->__('Secs'); ?>'
+                };
+                countDownSecond(sym_server_time);
+            </script>
+					</div>						
+					
+				</div>	
+					
+					
+				<div class="share">
+					<!-- AddThis Button BEGIN -->
+					<div class="addthis_toolbox addthis_default_style ">
+					
+						<table border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td><a class="addthis_button_facebook_like" fb:like:layout="button_count"></a></td>
+								<td><a class="addthis_button_tweet"></a></td>
+							</tr>
+							<tr>
+								<td><a class="addthis_button_pinterest_pinit"></a></td>
+								<td><a class="addthis_counter addthis_pill_style"></a></td>
+							</tr>
+						</table>
+					
+					</div>
+					<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-5018d6a958afb330"></script>
+					<!-- AddThis Button END -->
+				</div>
+	
+			</div>
+			
+			
+		</div>
+		
+		<div class="clear"></div>				
+		<div class="glace_deal-tabs" >
+			<ul class="glace_1-product-tabs glace_info-tabs" >
+				<li class="description-content">
+					<div class="product_tabs_description_contents"> 
+						<?php $_description = $_product->getDescription(); ?>
+						<?php if ($_description): ?>
+							<h2><?php echo Mage::helper('dailydeal')->__('Description') ?></h2>
+							<div class="std">
+								<?php echo $this->helper('catalog/output')->productAttribute($_product, $_description, 'description') ?>
+							</div>
+						<?php endif; ?>				
+				   </div>	
+				</li>
+								
+				<li id="Reviews-content">		      
+				    <div class="product_tabs_description_contents"> 				
+						<h2><?php echo Mage::helper('dailydeal')->__('Review') ?></h2>
+						<div class="std">
+        <dl>
+        <?php $_items = $this->getReviewsCollection($_deal->getProductId())->getItems();?>
+		<?php if (count($_items)){?>
+        <?php foreach ($_items as $_review):?>
+            <dt>
+                <a href="<?php echo $this->getReviewUrl($_review->getId()) ?>"><?php echo $this->htmlEscape($_review->getTitle()) ?></a> <?php echo $this->__('Review by <span>%s</span>', $this->htmlEscape($_review->getNickname())) ?>
+            </dt>
+            <dd>
+				<div class="rating-box">
+					<div class="rating" style="width:<?php echo $this->__getPercentRate($_review); ?>%;"></div>
+				</div>
+                <?php echo nl2br($this->htmlEscape($_review->getDetail())) ?>
+                <small class="date"><?php echo $this->__('(Posted on %s) long', $this->formatDate($_review->getCreatedAt())) ?></small>
+            </dd>
+        <?php endforeach; ?>
+        <?php }else{?>
+        	<dd>
+        		<span><?php echo Mage::helper('dailydeal')->__('There is no review for this product currently.');?></span>
+        	</dd>
+        <?php }?>
+        </dl>	
+
+			            </div>	
+					</div>
+				</li>			
+			</ul>
+       		<div style="clear:both;height:0;"></div>
+		</div>
+
+	</div>
+</div>
+		<?php break;?>
+	<?php }/*if (($aftertime > 0) && ($beforetime >= 0)){*/?>
+<?php }/*foreach ($_dealCollection as $_deal){*/?>
+<?php }else{/*if ($_collectionSize > 0){*/?>
+        	<p class="note-msg"><?php echo Mage::helper('dailydeal')->__('There is no review for this product currently.');?></p>        	
+        <?php }?>

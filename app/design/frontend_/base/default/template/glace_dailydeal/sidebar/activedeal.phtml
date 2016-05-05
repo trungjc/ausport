@@ -1,0 +1,95 @@
+<?php 
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+$numberactive = (int) Mage::getStoreConfig('dailydeal/general/numberactive') ? (int) Mage::getStoreConfig('dailydeal/general/numberactive') : 3;
+$_activedealsCollection = $this->getActivedeals();
+$_collectionSize = count($_activedealsCollection);
+if ($_collectionSize > 0):
+    $count = 0;
+    ?>
+		<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+		<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+		<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?> 
+
+    <div class="block block-deals" >
+        <div class="block-title-act">
+            <strong><span><?php echo $this->__('Active Deals'); ?></span></strong>
+        </div>
+        <div class="block-content">
+            <ol id="recently-viewed-items" class="mini-products-list">
+                <?php
+                foreach ($_activedealsCollection as $_activedeal) {
+                    $dealqty = $_activedeal->getDealQty();
+                    $soldqty = $_activedeal->getSoldQty();
+                    $_product = Mage::getModel('catalog/product')->load($_activedeal->getProductId());
+                    ?>
+                    <?php if ($count != $numberactive) { ?>		
+                        <li class="item">
+							<p class="product-name">
+								<a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath() ?>" title="<?php echo $_product->getName() ?>">
+									<?php echo $_product->getName() ?>
+								</a>
+							</p>
+                             <a href="<?php echo Mage::getBaseUrl() . $_product->getUrlPath() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+								<img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(70); ?>" width="70" height="70" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+							</a>					
+                            <div class="product-details">
+                                <div class="price-box">
+                                    
+                                    <?php if($_activedeal->checkDealPrice($_product)){ ?>
+                                    
+                                        <?php $_regularPrice = $_taxHelper->getPrice($_product, $_product->getPrice()) ?>		
+                                        <?php $_finalPrice = $_taxHelper->getPrice($_product, $_product->getFinalPrice()) ?>
+                                        <p class="old-price">
+                                            <span class="regular-price">
+                                                <span class="price"><?php echo $_coreHelper->currency($_regularPrice, true, false) ?></span>
+                                            </span>
+                                        </p>
+                                        <p class="special-price">
+                                            <span class="price">
+                                                <?php echo $_coreHelper->currency($_finalPrice, true, false) ?>
+                                            </span>
+                                        </p>	
+                                        
+                                    <?php }else{ 
+                                        $_activedeal->setMinPriceFollowProductType($_product);
+                                        ?>
+                                        <p class="from-price special-price">
+											<span class="pri-label"><?php echo $this->__('From');?></span>
+                                            <span class="price">
+                                                <?php echo $_coreHelper->currency($_product->getData('min_price'), true, false) ?>
+                                            </span>
+                                        </p>	
+                                    <?php } ?>
+                                </div>
+								<button type="button" class="button btn-buynow" onclick="setLocation('<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>')"><span><?php echo $this->__('Buy now') ?></span></button>
+                            </div>
+                            <div class="dailydeal-qty-box daily-qty-box-active">
+                                <?php if ($_activedeal->checkDealQtyToShow($_product) && Mage::helper('dailydeal')->getConfigDisplayQuantity()) { ?>
+                                    <?php
+                                    if (($dealqty - $soldqty) > 10) {
+
+                                        echo Mage::helper('dailydeal')->__('Hurry, just <span class="deal-qty">%s items</span> available.', $dealqty - $soldqty);
+                                    } elseif (($dealqty - $soldqty) <= 10 && ($dealqty - $soldqty) > 1) {
+
+                                        echo Mage::helper('dailydeal')->__('Hurry, just <span class="deal-qty">%s items</span> left!', $dealqty - $soldqty);
+                                    } elseif (($dealqty - $soldqty) == 1) {
+                                        echo Mage::helper('dailydeal')->__('Hurry, just <span class="deal-qty">%s item</span> left!', $dealqty - $soldqty);
+                                    }
+                                    ?>
+                                <?php } ?>
+                            </div>
+                        </li>
+                        <?php $count++; ?>
+                    <?php } ?>
+                <?php } ?>
+            </ol>
+            <script type="text/javascript">decorateList('recently-viewed-items');</script>
+            <div class="actions">
+                <a class="link-wishlist" style="float: right;" href="<?php echo Mage::helper('dailydeal')->getUrlHttp('dailydeal/index', true); ?>"><?php echo Mage::helper('dailydeal')->__('View all'); ?></a>
+
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+

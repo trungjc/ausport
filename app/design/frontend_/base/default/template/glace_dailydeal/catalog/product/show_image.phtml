@@ -1,0 +1,11 @@
+<?php
+// show image
+$_deal = Glace_Dailydeal_Model_Dailydeal::getModel()->loadByProductId($this->getData('product')->getId());
+
+if ($_deal->getId()) {
+    if( Mage::helper('dailydeal')->getConfigIsShowImageCatalogList()){
+        $url = Mage::helper('dailydeal')->getUrlImageCatalogList();
+?>
+        <img class="glacedld_img_sale" src ="<?php echo $url ?>" alt="<?php echo $this->__('sale');?>"/>
+    <?php } ?>
+<?php } ?>

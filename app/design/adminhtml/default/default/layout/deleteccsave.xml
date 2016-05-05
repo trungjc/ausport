@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <deleteccsave_adminhtml_deleteccsavebackend_index>
+	<reference name="content">
+	  <block type="deleteccsave/adminhtml_deleteccsavebackend" name="deleteccsavebackend" template="deleteccsave/deleteccsavebackend.phtml"/>
+	</reference>
+  </deleteccsave_adminhtml_deleteccsavebackend_index>
+</layout>

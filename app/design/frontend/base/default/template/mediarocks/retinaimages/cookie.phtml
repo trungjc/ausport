@@ -1,0 +1,51 @@
+<?php
+/**
+ * Media Rocks GbR
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled with 
+ * this package in the file MEDIAROCKS-LICENSE-COMMUNITY.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://solutions.mediarocks.de/MEDIAROCKS-LICENSE-COMMUNITY.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package is designed for Magento COMMUNITY edition. 
+ * Media Rocks does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Media Rocks does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please send an email to support@mediarocks.de
+ *
+ */
+
+if (!Mage::getStoreConfig('retinaimages/module/enabled')) {
+	return;
+}
+
+if ($device_pixel_ratio = Mage::getModel('core/cookie')->get('device_pixel_ratio')) {
+	Mage::register('is_retina', ($device_pixel_ratio >= 2));
+}
+else {
+?>
+<script type="text/javascript">
+(function(){
+  	if (document.cookie.indexOf('device_pixel_ratio') == -1 && 'devicePixelRatio' in window && window.devicePixelRatio == 2) {
+    	
+    	// set retina cookie
+    	Mage.Cookies.set('device_pixel_ratio', window.devicePixelRatio);
+    	
+    	// reload the page so php can check the cookie and provide retina images
+    	Mage.Cookies.get('device_pixel_ratio') == 2 && window.location.reload();
+  	}
+})();
+</script>
+<?php } ?>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Netgains_Deleteccsave>
+      <version>0.1.0</version>
+    </Netgains_Deleteccsave>
+  </modules>
+  <global>
+    <helpers>
+      <deleteccsave>
+        <class>Netgains_Deleteccsave_Helper</class>
+      </deleteccsave>
+    </helpers>
+	<blocks>
+	  <deleteccsave>
+		<class>Netgains_Deleteccsave_Block</class>
+	  </deleteccsave>
+			<adminhtml>
+				<rewrite>
+					<sales_order_grid>Netgains_Deleteccsave_Block_Adminhtml_Sales_Order_Grid</sales_order_grid>
+				</rewrite>
+			</adminhtml>
+	</blocks>
+  </global>
+  <admin>
+	<routers>
+	  <deleteccsave>
+	    <use>admin</use>
+		<args>
+		  <module>Netgains_Deleteccsave</module>
+		  <frontName>deleteccsave</frontName>
+		</args>
+	  </deleteccsave>
+	</routers>
+  </admin>
+  <adminhtml>
+
+	<acl>
+	  <resources>
+		<all>
+		  <title>Allow Everything</title>
+		</all>
+		<admin>
+		  <children>
+			<deleteccsave translate="title" module="deleteccsave">
+			  <title>Deleteccsave</title>
+			  <sort_order>1000</sort_order>
+			  <children>
+		  <deleteccsavebackend translate="title">
+			<title>Backend Page Title</title>
+		  </deleteccsavebackend>
+			  </children>
+			</deleteccsave>
+		  </children>
+		</admin>
+	  </resources>
+	</acl>
+	<layout>
+	  <updates>
+		<deleteccsave>
+		  <file>deleteccsave.xml</file>
+		</deleteccsave>
+	  </updates>
+	</layout>
+  </adminhtml>
+</config> 

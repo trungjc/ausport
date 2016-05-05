@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webline Magento
+ *
+ * @category   Wli
+ * @package    Wli_Productsortbywebline
+ * @author     Webline Magento Team
+ */
+-->
+<config>
+    <modules>
+        <Wli_Productsortbywebline>
+            <version>0.1.0</version>
+        </Wli_Productsortbywebline>
+    </modules> 
+    <global>
+        <resources>
+            <productsortbywebline_setup>
+                <setup>
+                    <module>Wli_Productsortbywebline</module>
+                    <class>Mage_Catalog_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </productsortbywebline_setup>
+            <productsortbywebline_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </productsortbywebline_write>
+            <productsortbywebline_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </productsortbywebline_read>
+        </resources>
+        <blocks>
+        	<productsortbywebline>
+                <class>Wli_Productsortbywebline_Block</class>
+            </productsortbywebline>
+           <adminhtml>
+               <rewrite>
+                   <catalog_product_grid>Wli_Productsortbywebline_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>
+               </rewrite>
+           </adminhtml>
+           <catalog>
+           		<rewrite>
+           			<product_list_toolbar>Wli_Productsortbywebline_Block_Catalog_Product_List_Toolbar</product_list_toolbar>
+           		</rewrite>
+           </catalog>
+        </blocks>
+    </global>
+</config>

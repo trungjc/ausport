@@ -1,0 +1,6 @@
+input.textbox-readonly { 
+    color: #000000; background-color: #FAFAFA; border-color: #FAFAFA; 
+}
+.columns .form-list td.value { 
+    width: 350px; 
+}

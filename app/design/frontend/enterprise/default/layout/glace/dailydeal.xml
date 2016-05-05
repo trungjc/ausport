@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>glace_dailydeal/css/promo_group.css</stylesheet>
+            </action>
+            <block type="core/template"  name="dailydeal.countdown" as="countdown" template="glace_dailydeal/countdown.phtml"/>
+        </reference>
+        <reference name="left">
+            <block type="dailydeal/sidebar_todaydeal" name="todaydeal_left" before="-">
+                <action method="setTemplate">
+                    <template helper="dailydeal/sidebar/displayTodaydealLeft"/>
+                </action>
+            </block>
+            <block type="dailydeal/sidebar_activedeal" name="activedeal_left" after="todaydeal_left">
+                <action method="setTemplate">
+                    <template helper="dailydeal/sidebar/displayActivedealLeft"/>
+                </action>
+            </block>
+            <block type="dailydeal/sidebar_calendar" name="calendar_left" after="activedeal_left">
+                <action method="setTemplate">
+                    <template helper="dailydeal/sidebar/displayCalendarLeft"/>
+                </action>
+            </block>
+        </reference> 
+        <reference name="right">
+            <block type="dailydeal/sidebar_todaydeal" name="todaydeal_right" before="-">
+                <action method="setTemplate">
+                    <template helper="dailydeal/sidebar/displayTodaydealRight"/>
+                </action>
+            </block>
+            <block type="dailydeal/sidebar_activedeal" name="activedeal_right" after="todaydeal_right">
+                <action method="setTemplate">
+                    <template helper="dailydeal/sidebar/displayActivedealRight"/>
+                </action>
+            </block>
+            <block type="dailydeal/sidebar_calendar" name="calendar_right" after="activedeal_right">
+                <action method="setTemplate">
+                    <template helper="dailydeal/sidebar/displayCalendarRight"/>
+                </action>
+            </block>								
+        </reference>
+    </default>
+	
+    
+    
+    
+    <dailydeal_comming_index>
+        <remove name="todaydeal_right"/>
+        <remove name="activedeal_right"/>
+        <remove name="calendar_right"/>
+        <remove name="todaydeal_left"/>
+        <remove name="activedeal_left"/>
+        <remove name="calendar_left"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="dailydeal/data/chooseColumnLayout"/>
+            </action>
+        </reference>
+        
+        
+        <reference name="content">
+            <block type="dailydeal/showtabs_comming" name="content_tab" template="glace_dailydeal/showtabs/comming.phtml">
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            </block>
+        </reference>
+    </dailydeal_comming_index>
+    
+    <dailydeal_past_index>
+        <remove name="todaydeal_right"/>
+        <remove name="activedeal_right"/>
+        <remove name="calendar_right"/>
+        <remove name="todaydeal_left"/>
+        <remove name="activedeal_left"/>
+        <remove name="calendar_left"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="dailydeal/data/chooseColumnLayout"/>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="dailydeal/showtabs_past" name="content_tab" template="glace_dailydeal/showtabs/past.phtml">
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            </block>
+        </reference>
+    </dailydeal_past_index>
+    
+    
+    
+    <dailydeal_index_index>
+        <remove name="todaydeal_right"/>
+        <remove name="activedeal_right"/>
+        <remove name="calendar_right"/>
+        <remove name="todaydeal_left"/>
+        <remove name="activedeal_left"/>
+        <remove name="calendar_left"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template helper="dailydeal/data/chooseColumnLayout"/>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="dailydeal/showtabs_active" name="content_tab" template="glace_dailydeal/showtabs/active.phtml">
+                <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                    <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                </block>
+                <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            </block>
+        </reference>
+    </dailydeal_index_index>
+
+    <catalog_product_view>
+        <!-- 
+      		<remove name="todaydeal_right"/>
+      		<remove name="activedeal_right"/>
+      		<remove name="calendar_right"/>
+      		<remove name="todaydeal_left"/>
+      		<remove name="activedeal_left"/>
+      		<remove name="calendar_left"/> 
+      		-->
+    </catalog_product_view>
+    <!-- Support for all type product -->
+    
+    
+    
+</layout>

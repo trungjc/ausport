@@ -1,0 +1,97 @@
+<?php
+// catalog and active (show tag)
+$_coreHelper = $this->helper('core');
+$_taxHelper = $this->helper('tax');
+$title = Mage::getStoreConfig('dailydeal/general/title');
+?>
+
+<?php
+$_deal = Glace_Dailydeal_Model_Dailydeal::getModel()->loadByProductId($this->getData('product')->getId());
+
+if ($_deal->getId()) {
+
+    $dealqty = $_deal->getDealQty();
+    $soldqty = $_deal->getSoldQty();
+    $gmtcore = Mage::getSingleton('core/date')->getGmtOffset();
+
+    $beforetime = Mage::getModel('core/date')->timestamp(time()) - strtotime($_deal->getStartDateTime());
+    $aftertime = strtotime($_deal->getEndDateTime()) - Mage::getModel('core/date')->timestamp(time());
+    if (($aftertime > 0) && ($beforetime >= 0)) {
+        $_product = Mage::getModel('catalog/product')->load($_deal->getProductId());
+        ?>
+<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?> 
+
+<div class="glacedld_display_cate">
+		<?php 
+            if( Mage::helper('dailydeal')->getConfigIsShowImageCatalogList()){
+                    $url = Mage::helper('dailydeal')->getUrlImageCatalogList();
+                    ?>
+                <img class="glacedld_img_sale" src ="<?php echo $url ?>" alt="<?php echo $this->__('sale');?>"/>
+        <?php } ?>
+		<div class="glacedld_category">
+			<div id="counter" class="counter">
+				<ul>	
+					<li>
+						<div class="countdown_num" id="lp_day-<?php echo $_deal->getDailydealId() ?>"></div><div id="lbl_lp_day-<?php echo $_deal->getId(); ?>"></div>
+					</li>
+					<li>
+						<div class="countdown_num" id="lp_hour-<?php echo $_deal->getDailydealId() ?>"></div><div id="lbl_lp_hour-<?php echo $_deal->getId(); ?>"></div>
+					</li>
+					<li>
+						<div class="countdown_num" id="lp_minute-<?php echo $_deal->getDailydealId() ?>"></div><div id="lbl_lp_minute-<?php echo $_deal->getId(); ?>"></div>
+					</li>
+					<li>
+						<div class="countdown_num" id="lp_second-<?php echo $_deal->getDailydealId() ?>"></div><div id="lbl_lp_second-<?php echo $_deal->getId(); ?>"></div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="glacedld_mess_cate">
+				<?php
+				$dealqty = $_deal->getDealQty();
+				$soldqty = $_deal->getSoldQty();
+				?>
+				<?php if (Mage::helper('dailydeal')->getConfigDisplayQuantity()) { ?>
+					<?php
+					if (($dealqty - $soldqty) > 10) {
+						echo Mage::helper('dailydeal')->renderDealQtyOnCatalogPage($dealqty - $soldqty);
+					} elseif (($dealqty - $soldqty) <= 10 && ($dealqty - $soldqty) > 1) {
+						echo Mage::helper('dailydeal')->renderDealQtyOnCatalogPage($dealqty - $soldqty);
+					} elseif (($dealqty - $soldqty) == 1) {
+						echo Mage::helper('dailydeal')->renderDealQtyOnCatalogPage($dealqty - $soldqty);
+					}
+					?>
+				<?php } ?>
+			</div>
+		</div>
+        <?php
+        //echo 'yess';
+        $remain_second = strtotime($_deal->getEndDateTime()) - Mage::getModel('core/date')->timestamp();
+        ?>
+        <script type="text/javascript">
+            var todaydeal_server_time = { 
+                second : <?php echo $remain_second; ?>,
+                callback : '',
+                                
+                id_day  : 'lp_day-' + <?php echo $_deal->getId(); ?>,
+                id_hour  : 'lp_hour-' + <?php echo $_deal->getId(); ?>,
+                id_minute  : 'lp_minute-' + <?php echo $_deal->getId(); ?>,
+                id_second  : 'lp_second-' + <?php echo $_deal->getId(); ?>,
+                                
+                label_day : 'lbl_lp_day-' + <?php echo $_deal->getId(); ?>,
+                label_hour : 'lbl_lp_hour-' + <?php echo $_deal->getId(); ?>,
+                label_minute : 'lbl_lp_minute-' + <?php echo $_deal->getId(); ?>,
+                label_second : 'lbl_lp_second-' + <?php echo $_deal->getId(); ?>,
+                
+                label_day_value : '<?php echo Mage::helper('dailydeal')->__('d'); ?>',
+                label_hour_value : '<?php echo Mage::helper('dailydeal')->__('h'); ?>',
+                label_minute_value : '<?php echo Mage::helper('dailydeal')->__('m'); ?>',
+                label_second_value : '<?php echo Mage::helper('dailydeal')->__('s'); ?>'
+            };
+            countDownSecond(todaydeal_server_time);
+        </script>     
+	</div>
+    <?php } ?>
+<?php } ?>

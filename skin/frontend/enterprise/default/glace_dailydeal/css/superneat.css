@@ -1,0 +1,62 @@
+.deal-product{
+	padding: 0px 0px 0px 0px;
+	margin: 10px 0px;
+	-webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;
+    box-shadow: 0 0 3px #3B5871; -moz-box-shadow: 0 0 3px #3B5871; -webkit-box-shadow: 0 0 3px #3B5871;
+}
+.ct-deal-pro{
+	background: #fff; 
+	text-align: center; 
+	padding: 10px 10px 0px 10px;
+	-webkit-border-radius:0px 0px 5px 5px; 
+	-moz-border-radius:0px 0px 5px 5px; 
+	border-radius:0px 0px 5px 5px;
+}
+.deal-product .catalogproductview {
+	background-color: #3b5871;
+	background-image: linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image: -webkit-linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image:    -moz-linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image:     -ms-linear-gradient(to bottom, #3b5871, #0A263D);
+	background-image:      -o-linear-gradient(to bottom, #3b5871, #0A263D);
+	min-height: 40px;
+	border-radius: 5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	text-align: center;
+}
+.deal-product .catalogproductview h3{
+	color: white;
+	padding:0; 
+	margin:0; 
+	line-height:40px;
+	font-family: verdana,arial;
+	font-size: 19px;
+	font-weight: normal;
+}
+
+/*COUNTER SPECIFIC STYLES */
+.counter ul.countdown{
+	list-style-type: none;
+	color: #4a4949;
+	text-align: center;
+	width:100%;
+	margin: 0px auto;
+	text-align: center;
+}
+.counter ul.countdown li{display: inline-table; margin: 0px 9px 0px 0px;}
+.counter ul.countdown li.first{}
+.counter ul.countdown li.last{ margin: 0px;}
+.counter ul.countdown li div{text-transform: uppercase; clear: both;text-align:center;width:100%;}
+.counter ul.countdown li div.countdown_num{font-size: 32px; color: #fff; margin: 0px 0px 3px 0px;}
+.counter ul.countdown li div.countdown_num span{background: #000; padding: 3px 7px; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; margin: 0px 1px;}
+.qty-deal{background: #e7f1f4; border-top: 1px solid #D3D3D3; position: relative; margin: 10px -10px 0; padding: 10px 10px 15px; -webkit-border-radius:0px 0px 5px 5px; -moz-border-radius:0px 0px 5px 5px; border-radius:0px 0px 5px 5px; font-size: 15px;}
+.qty-deal span{font-style: italic;}
+.qty-deal span.deal-qty{font-size: 15px; color: red;}
+.qty-deal strong{background: none; padding: 0px; color: #f1cc00; font-weight: bold;}
+.counter ul.countdown li.no_countdown{
+	padding-top:4px;
+	background:transparent;
+	height:110px;
+	width:80px;
+}

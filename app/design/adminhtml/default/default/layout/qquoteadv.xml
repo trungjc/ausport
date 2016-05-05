@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * CART2QUOTE CONFIDENTIAL
+ * __________________
+ *
+ *  [2009] - [2015] Cart2Quote B.V.
+ *  All Rights Reserved.
+ *
+ * NOTICE OF LICENSE
+ *
+ * All information contained herein is, and remains
+ * the property of Cart2Quote B.V. and its suppliers,
+ * if any.  The intellectual and technical concepts contained
+ * herein are proprietary to Cart2Quote B.V.
+ * and its suppliers and may be covered by European and Foreign Patents,
+ * patents in process, and are protected by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Cart2Quote B.V.
+ *
+ * @category    Ophirah
+ * @package     Qquoteadv
+ * @copyright   Copyright (c) 2015 Cart2Quote B.V. (http://www.cart2quote.com)
+ * @license     http://www.cart2quote.com/ordering-licenses
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/qquoteadv/tooltiphelper.js</name>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/qquoteadv/massupdate.js</name>
+            </action>
+            <action method="addCss">
+                <link>css/qquoteadv/tooltip.css</link>
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
+    <adminhtml_qquoteadv_index>
+        <reference name="content">
+            <block type="qquoteadv/adminhtml_qquoteadv" name="qquote"/>
+        </reference>
+    </adminhtml_qquoteadv_index>
+
+    <adminhtml_qquoteadv_edit>
+        <reference name="head">
+            <action method="addCss">
+                <link>css/qquoteadv/edit.css</link>
+            </action>
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/qquoteadv/multipleupload.js</name>
+            </action>
+        </reference>
+    </adminhtml_qquoteadv_edit>
+
+    <!--
+        <qquoteadv_adminhtml_qquoteadv_edit>
+            <reference name="head">
+               <action method="addCss"><link>css/qquoteadv/edit.css</link></action>
+            </reference>
+        </qquoteadv_adminhtml_qquoteadv_edit>
+    -->
+    <!--
+    Email layouts section
+    -->
+    <default>
+        <reference name="notifications">
+            <block type="qquoteadv/adminhtml_notifications" name="qquoteadv_notifications" template="qquoteadv/notifications.phtml"></block>
+        </reference>
+    </default>
+    <adminhtml_sales_order_view>
+        <reference name="order_info">
+            <action method="setTemplate">
+                <template>qquoteadv/sales/order/view/info.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <!-- C2Quote Customer -->
+    <adminhtml_qquoteadv_quotes>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="qquoteadv/adminhtml_qquoteadv_grid" name="adminhtml.qquoteadv.grid.quotes"/>
+        </block>
+    </adminhtml_qquoteadv_quotes>
+    <!--
+        <qquoteadv_adminhtml_qquoteadv_quotes>
+            <block type="core/text_list" name="root" output="toHtml">
+                <block type="qquoteadv/adminhtml_qquoteadv_grid" name="adminhtml.qquoteadv.grid.quotes"/>
+            </block>
+        </qquoteadv_adminhtml_qquoteadv_quotes>
+    -->
+    <!-- C2Quote Customer -->
+</layout>

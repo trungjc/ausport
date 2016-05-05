@@ -1,0 +1,297 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="root">
+			<action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+		</reference>
+		<reference name="top.menu">
+			<!--block type="cms/block" name="top_menu" before="-">
+				<action method="setBlockId">
+					<block_id>top_menu</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="call_us" after="top_menu">
+				<action method="setBlockId">
+					<block_id>call_us</block_id>
+				</action>
+			</block!-->
+			<block type="checkout/cart_minicart" name="minicart_head" template="checkout/cart/minicart.phtml" after="call_us">
+             <block type="checkout/cart_sidebar" name="minicart_content" template="checkout/cart/minicart/items.phtml">
+                 <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
+                 <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/minicart/default.phtml</template></action>
+                 <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/minicart/default.phtml</template></action>
+                 <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/minicart/default.phtml</template></action>
+
+                 <block type="core/text_list" name="cart_sidebar.cart_promotion" as="cart_promotion" translate="label" module="checkout">
+                     <label>Mini-cart promotion block</label>
+                 </block>
+                 <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                     <label>Shopping Cart Sidebar Extra Actions</label>
+                 </block>
+             </block>
+         </block>
+		</reference>		
+		<reference name="right">
+			<remove name="paypal.partner.right.logo"/>
+			<remove name="catalog.compare.sidebar"/>
+			<remove name="right.poll"/>	
+			<remove name="right.reports.product.viewed"/>
+			<remove name="right.reports.product.compared"/>
+			<remove name="left.reports.product.viewed"/>
+			<block type="cms/block" name="mobile_showroom">
+				<action method="setBlockId">
+					<block_id>mobile_showroom</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="special_deal">
+				<action method="setBlockId">
+					<block_id>special_deal</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="customer_support">
+				<action method="setBlockId">
+					<block_id>customer_support</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="testimonials">
+				<action method="setBlockId">
+					<block_id>testimonials</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="social">
+				<action method="setBlockId">
+					<block_id>social</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="ausport_videos">
+				<action method="setBlockId">
+					<block_id>ausport_videos</block_id>
+				</action>
+			</block>					
+		</reference>
+		
+		<!-- 
+		<reference name="beforeContent">			
+			<block type="cms/block" name="banner-left">
+				<action method="setBlockId">
+					<block_id>banner-left</block_id>
+				</action>
+			</block>
+		</reference>
+		
+		<reference name="afterContent">	
+			<block type="cms/block" name="banner-right">
+				<action method="setBlockId">
+					<block_id>banner-right</block_id>
+				</action>
+			</block>
+		</reference>
+		 -->
+
+		<reference name="left">
+			<block type="cms/block" name="special_deal">
+				<action method="setBlockId">
+					<block_id>special_deal</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="customer_support">
+				<action method="setBlockId">
+					<block_id>customer_support</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="social">
+				<action method="setBlockId">
+					<block_id>social</block_id>
+				</action>
+			</block>
+		</reference>
+
+		<reference name="footer">
+			<remove name="footer.newsletter" />
+			<remove name="store_switcher" />
+			<remove name="footer_currency" />
+			<remove name="footer_links" />
+			<remove name="footer_links2" />
+			<remove name="cms_footer_links"/>
+			
+			<!--block type="cms/block" name="tool_training">
+				<action method="setBlockId">
+					<block_id>tool_training</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="indoor_training">
+				<action method="setBlockId">
+					<block_id>indoor_training</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="bottom_mobile_showroom">
+				<action method="setBlockId">
+					<block_id>bottom_mobile_showroom</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="gift_certificates">
+				<action method="setBlockId">
+					<block_id>gift_certificates</block_id>
+				</action>
+			</block-->
+			
+<layout>
+    <checkout_cart_index>
+        <reference name="content">
+            <remove name="checkout.cart.coupon"/>
+        </reference>
+    </checkout_cart_index>
+</layout>
+			<block type="cms/block" name="fLinks1">
+				<action method="setBlockId">
+					<block_id>footer_links_company</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="fLinks2">
+				<action method="setBlockId">
+					<block_id>footer_links_company1</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="fLinks3">
+				<action method="setBlockId">
+					<block_id>footer_links_company2</block_id>
+				</action>
+			</block>
+			<block type="cms/block" name="fLinks4">
+				<action method="setBlockId">
+					<block_id>footer_links_company3</block_id>
+				</action>
+			</block>
+		</reference> 
+	</default>
+	
+	<cms_index_index>
+	   <reference name="root">
+			<remove name="breadcrumbs"/>
+		</reference>
+		<reference name="featuredContainer">
+		    <block type="catalog/product_new" name="home.catalog.product.new" template="catalog/product/new.phtml">
+            <block type="page/html_pager" name="new_products_pager">
+            	<action method="setLimit"><value>4</value></action>
+            </block>            
+         </block>    		      
+            <block type="core/template" name="category.products" template="inchoo/featuredproducts/view.phtml">
+                <block type="featuredproducts/product_list" name="featured_product_list" as="featured_product_list" template="inchoo/featuredproducts/list.phtml">
+                    <block type="page/html_pager" name="featured_products_pager">
+                    	<action method="setLimit"><value>4</value></action>
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                </block>
+            </block>
+      </reference>    
+
+		
+		<reference name="beforeContent">
+         <block type="bannerslider/bannerslider" name="homeSidebarLeft" before="-">
+           <action method="setBlockPosition">
+               <block_position>home-sidebar-fixed-left</block_position>
+           </action>
+         </block>
+		   </reference>
+		   <reference name="afterContent">
+		       <block type="bannerslider/bannerslider" name="homeSidebarRight" before="-">
+		           <action method="setBlockPosition">
+		               <block_position>home-sidebar-fixed-right</block_position>
+		           </action>
+		       </block>
+		   </reference>
+		                  
+	</cms_index_index>
+	
+
+	<catalog_product_view>
+		<!-- 
+		<remove name="product.info.sharing"/>
+		<remove name="product.reviews"/>
+		<remove name="product.info.addto"/>
+		<remove name="product.info.availability"/>
+		 -->
+	   <reference name="head">
+          <action method="addJs"><script>varien/product.js</script></action>
+          <action method="addJs"><script>varien/configurable.js</script></action>
+          <action method="addItem"><type>skin_js</type><script>js/lib/elevatezoom/jquery.elevateZoom-3.0.8.min.js</script></action>
+
+          <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/><!--<if/><condition>can_load_calendar_js</condition>--></action>
+          <action method="addItem"><type>js</type><name>calendar/calendar.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+          <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name><!--<params/><if/><condition>can_load_calendar_js</condition>--></action>
+      </reference>
+		<remove name="product.info.additional"/>
+		<reference name="catalog.product.related">
+			<action method="setTierPriceTemplate"><template></template></action>
+		</reference>
+		<reference name="left">
+			<block type="catalog/layer_view" name="catalog.leftnav" before="-" template="catalog/layer/view.phtml">
+             <block type="core/text_list" name="catalog.leftnav.state.renderers" as="state_renderers" />
+         </block>
+		</reference>
+		
+		<reference name="root">
+			<!--<action method="setTemplate"><template>page/2columns-left.phtml</template></action>	-->
+			<action method="setTemplate"><template>page/1column.phtml</template></action>	  		
+		</reference>
+		<reference name="product.description">
+			<action method="setTitle" translate="value"><value>Features</value></action>
+		</reference>
+		<reference name="product.attributes">
+			<action method="setTitle" translate="value"><value>Specifications</value></action>
+		</reference>
+		
+	  <!-- <reference name="beforeContent">
+	         <block type="bannerslider/bannerslider" name="productBannerLeft" before="-">
+	           <action method="setBlockPosition">
+	               <block_position>catalog-sidebar-fixed-left</block_position>
+	           </action>
+	         </block>
+	     </reference>
+	     <reference name="afterContent">
+	         <block type="bannerslider/bannerslider" name="productBannerRight" before="-">
+	             <action method="setBlockPosition">
+	                 <block_position>catalog-sidebar-fixed-right</block_position>
+	             </action>
+	         </block>
+	     </reference>	 -->
+  </catalog_product_view>
+	<catalogsearch_result_index translate="label">
+    <label>Quick Search Form</label>
+    <reference name="root">
+        <action method="setTemplate"><template>page/1column.phtml</template></action>
+    </reference>
+    
+    <reference name="beforeContent">
+       <block type="bannerslider/bannerslider" name="cataLogBannerLeft" before="-">
+         <action method="setBlockPosition">
+             <block_position>catalog-sidebar-fixed-left</block_position>
+         </action>
+       </block>
+       </reference>
+       <reference name="afterContent">
+       <block type="bannerslider/bannerslider" name="cataLogBannerRight" before="-">
+           <action method="setBlockPosition">
+               <block_position>catalog-sidebar-fixed-right</block_position>
+           </action>
+       </block>
+       </reference>	
+	</catalogsearch_result_index>
+
+	<catalog_category_layered>
+		<reference name="beforeContent">
+         <block type="bannerslider/bannerslider" name="cataLogLayerBannerLeft" before="-">
+           <action method="setBlockPosition">
+               <block_position>catalog-sidebar-fixed-left</block_position>
+           </action>
+         </block>
+		   </reference>
+		   <reference name="afterContent">
+		       <block type="bannerslider/bannerslider" name="cataLogLayerBannerRight" before="-">
+		           <action method="setBlockPosition">
+		               <block_position>catalog-sidebar-fixed-right</block_position>
+		           </action>
+		       </block>
+		   </reference>     			
+	</catalog_category_layered>
+</layout>

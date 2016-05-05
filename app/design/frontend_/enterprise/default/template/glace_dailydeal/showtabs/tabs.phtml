@@ -1,0 +1,19 @@
+<table class="tab-deal">
+    <tr>
+        <td>
+            <a href="<?php echo $this->getUrl('dailydeal'); ?>">
+                <span><span><?php echo Mage::helper('dailydeal')->__('Current Deals'); ?></span></span>
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo $this->getUrl('dailydeal/past'); ?>">
+                <span><span><?php echo Mage::helper('dailydeal')->__('Past Deals'); ?></span></span>
+            </a>
+        </td>
+        <td>
+            <a href="<?php echo $this->getUrl('dailydeal/comming'); ?>">
+                <span><span><?php echo Mage::helper('dailydeal')->__('Upcoming Deals'); ?></span></span>
+            </a>
+        </td>
+    </tr>
+</table>

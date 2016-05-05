@@ -1,0 +1,175 @@
+<?php 
+	$_coreHelper = $this->helper('core');
+	$_taxHelper  = $this->helper('tax');
+	$numberactive = (int)Mage::getStoreConfig('dailydeal/general/numberactive') ? (int)Mage::getStoreConfig('dailydeal/general/numberactive') : 3;
+	$title = Mage::getStoreConfig('dailydeal/general/title');
+	$timechange = (int)Mage::getStoreConfig('dailydeal/general/timechange'); 
+?>
+<?php 	
+	$arraydays = $this->getWeeklydeal();	
+?>
+<!--  anh san pham, ten san pham, gia cu, gia khuyen mai -->
+<!--Chu y la load 2 lan file open.js se gay ra xung dot-->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('glace_dailydeal/js/tooltip/opentip.js')?>">
+//this.list.findAll(function(t) {return (t.options.group == groupName);}).invoke('doHide');
+</script>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('glace_dailydeal/css/calendar.css')?>" type="text/css" media="all"/>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('glace_dailydeal/css/tooltip/opentip.css')?>" type="text/css" media="all"/>
+
+<script type="text/javascript">
+	var anonymous = [];
+	function hiddendeals(){
+		for (k = 0; k< 7; k++){
+			var idAno = document.getElementById('anonymous_element_'+k); 
+			if (idAno != null){
+		//		Dung de remove luon id, de cho bo nho dem cua trang web ko chua qua n tag
+		//		document.body.removeChild(idAno);
+		//		Doi attibute cua 1 tag
+				idAno.removeClassName('ot-completely-visible').addClassName('ot-completely-hidden');
+			 } else continue;  			
+		}
+	}
+</script>
+
+<?php $_dld_color_title = Mage::helper('dailydeal')->getConfigSchemeColor(); ?>
+<?php $_dld_color_coundown = Mage::helper('dailydeal')->getConfigCountdownColor(); ?>
+<?php $_dld_color_lighight = Mage::helper('dailydeal')->getConfigHighlightColor(); ?> 
+<?php
+	function colourBrightness_Cal($hex, $percent) {
+	$hash = '';
+	if (stristr($hex,'#')) {
+		$hex = str_replace('#','',$hex);
+		$hash = '#';
+	}
+	/// HEX TO RGB
+	$rgb = array(hexdec(substr($hex,0,2)), hexdec(substr($hex,2,2)), hexdec(substr($hex,4,2)));
+	//// CALCULATE
+	for ($i=0; $i<3; $i++) {
+		// See if brighter or darker
+		if ($percent > 0) {
+			// Lighter
+			$rgb[$i] = round($rgb[$i] * $percent) + round(255 * (1-$percent));
+		} else {
+			// Darker
+			$positivePercent = $percent - ($percent*2);
+			$rgb[$i] = round($rgb[$i] * $positivePercent) + round(0 * (1-$positivePercent));
+		}
+		// In case rounding up causes us to go to 256
+		if ($rgb[$i] > 255) {
+			$rgb[$i] = 255;
+		}
+	}
+	//// RBG to Hex
+	$hex = '';
+	for($i=0; $i < 3; $i++) {
+		// Convert the decimal digit to hex
+		$hexDigit = dechex($rgb[$i]);
+		// Add a leading zero if necessary
+		if(strlen($hexDigit) == 1) {
+		$hexDigit = "0" . $hexDigit;
+		}
+		// Append to the hex string
+		$hex .= $hexDigit;
+	}
+	return $hash.$hex;
+}
+?>
+
+<style type="text/css">
+	.block-deals-cal{ box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>; -moz-box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>; -webkit-box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>}
+	.block-deals-cal .block-title{ background-color: <?php echo $_dld_color_title; ?>; background-image: linear-gradient(to bottom, <?php echo colourBrightness_Cal($_dld_color_title,0.9);?>, <?php echo colourBrightness_Cal($_dld_color_title,-0.7);?>);}	
+	.opentip{box-shadow: 0 0 3px <?php echo $_dld_color_title; ?>;}
+	.ot-container .header{ background-color: <?php echo colourBrightness_Cal($_dld_color_title,0.9);?>; background-image: linear-gradient(to bottom, <?php echo colourBrightness_Cal($_dld_color_title,0.9);?>, <?php echo colourBrightness_Cal($_dld_color_title,-0.7);?>);}
+	.block-deals-week .block-content li.odd{background: <?php echo colourBrightness_Cal($_dld_color_title,0.1);?>}
+	.block-deals-week .special-price .price{color: <?php echo $_dld_color_lighight;?>}
+	table.doctable tbody td.select_deal{background:<?php echo $_dld_color_title; ?>}
+	table.doctable tbody td.select_deal:hover{background:<?php echo $_dld_color_title; ?>}
+	table.doctable tbody td.select_deal:hover span{background:<?php echo $_dld_color_title; ?>}
+	table.doctable tbody td a{color:<?php echo $_dld_color_title; ?>}
+	.block-deals-week .block-content p.product-name a{color: <?php echo colourBrightness_Cal($_dld_color_title,-0.7);?>;}
+</style>
+
+<div id="blockcalendar" class="block-deals-cal">
+	<div class="block-title">
+		<strong><span><?php echo $this->__('Deals of Week'); ?></span></strong>
+	</div>
+	<table class="doctable table"  >
+		<tbody class="tbody">
+		<tr>
+			<?php 
+				$temp = array();		
+				$i = 0;
+				$j = 0;
+				$m = date('m',Mage::getModel('core/date')->timestamp(time()));
+				$d = date('d',Mage::getModel('core/date')->timestamp(time()));
+				$Y = date('Y',Mage::getModel('core/date')->timestamp(time()));
+				while ($i<4){
+					$tomorrowshow = date('d-m',mktime(0,0,0,$m,$d+$i,$Y));
+					$textual = date('D',mktime(0,0,0,$m,$d+$i,$Y));
+					$tomorrow = date('Y-m-d',mktime(0,0,0,$m,$d+$i,$Y));
+			?>
+			
+			<?php if (in_array($tomorrow,$arraydays)){ $temp[$j] = $i;$j++;}?>
+	
+					
+			<td <?php if (in_array($tomorrow,$arraydays)) echo 'class="select_deal"';?>>
+				<span id="cell-<?php echo $i;?>" ><?php echo $tomorrowshow.' '.$textual;?></span>
+				<span id="cell-value-<?php echo $i;?>" style="display:none"><?php echo $this->renderDealFollowDayHtml($tomorrow) ?></span>
+			</td>
+		
+			<?php 
+				$i++;
+				}
+			?>
+	
+		</tr>
+		<tr>
+			<?php 			
+				while ($i<7){
+					$tomorrowshow = date('d-m',mktime(0,0,0,date('m'),date('d')+$i,date("Y")));
+					$textual = date('D',mktime(0,0,0,date('m'),date('d')+$i,date("Y")));
+					$tomorrow = date('Y-m-d',mktime(0,0,0,$m,$d+$i,$Y));
+			?>
+		<?php if (in_array($tomorrow,$arraydays)){ $temp[$j] = $i;$j++;}?>
+			<td id="<?php echo $i;?>" <?php if (in_array($tomorrow,$arraydays)) echo 'class="select_deal"'?>>
+				<span id="cell-<?php echo $i;?>" ><?php echo $tomorrowshow.' '.$textual;?></span>
+				<span id="cell-value-<?php echo $i;?>" style="display:none"><?php echo $this->renderDealFollowDayHtml($tomorrow) ?></span>
+			</td>			
+			<?php 
+				$i++;
+				}
+			?>	
+			<td id="cell_more" style="border: 2px solid white; ">
+                            <a href="<?php echo Mage::helper('dailydeal')->getUrlHttp('dailydeal/index', true); ?>"><?php echo Mage::helper('dailydeal')->__('More'); ?></a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+</div>
+	
+<script type="text/javascript">
+    
+    	//hideOn: 'click', an di roi moi cho show deal dc, 
+	//neu dung su kien window.onclick thi bi xung dot voi su kien nay
+	Opentip.styles.grouped = {
+			stem: false,
+			target: true,
+			tipJoint: ['center', 'top'],
+			hideTrigger: ['closeButton','trigger'],
+//			showOn: 'mouseover',
+	//		hideOn: 'click',			
+			group: 'myGroudfp',
+			hideDelay: 1
+		}
+        
+<?php
+	for ($k = 0; $k < count($temp); $k++){
+		$daybycell =  date('Y-m-d',mktime(0,0,0,$m,$d+$temp[$k],$Y));
+?>
+        var cell_id = 'cell-<?php echo $temp[$k];?>';
+        var html = $('cell-value-<?php echo $temp[$k];?>').innerHTML;
+        $(cell_id).addTip(html,{style: 'grouped'});
+<?php }?>
+		
+</script>

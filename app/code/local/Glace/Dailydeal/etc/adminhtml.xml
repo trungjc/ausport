@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <cms_ideas>
+        	<title>CMS IDEAS</title>
+			<sort_order>100</sort_order>
+            <children>
+                <dailydeal>
+                    <title>Daily Deal</title>
+                    <sort_order>30</sort_order>
+                    <children>
+                        <dealitemsadd module="dailydeal">
+                            <title>Add New Deal</title>
+                            <sort_order>30</sort_order>
+                            <action>dailydeal/adminhtml_dealitems/new</action>
+                        </dealitemsadd>
+                        <dealscheduler module="dailydeal">
+                            <title>Add Multi Deals</title>
+                            <sort_order>40</sort_order>
+                            <action>dailydeal/adminhtml_dealscheduler/index</action>
+                        </dealscheduler>
+                        <dealitems module="dailydeal">
+                            <title>Manage Deals</title>
+                            <sort_order>50</sort_order>
+                            <children>
+                                <dealitemsa module="dailydeal">
+                                    <title>Current</title>
+                                    <sort_order>1</sort_order>
+                                    <action>dailydeal/adminhtml_dealitems/currentdeals</action>
+                                </dealitemsa>
+                                <dealschedule module="dailydeal">
+		                            <title>With Days</title>
+		                            <sort_order>2</sort_order>
+		                            <action>dailydeal/adminhtml_dailyschedule/days</action>
+		                        </dealschedule>
+                                <dealitemsb module="dailydeal">
+                                    <title>All</title>
+                                    <sort_order>3</sort_order>
+                                    <action>dailydeal/adminhtml_dealitems/alldeals</action>
+                                </dealitemsb>
+                            </children>
+                        </dealitems>
+                        <configuration module="dailydeal">
+                            <title>Settings</title>
+                            <sort_order>60</sort_order>
+                            <action>adminhtml/system_config/edit/section/dailydeal</action>
+                        </configuration>
+                    </children>
+                </dailydeal>
+            </children>
+        </cms_ideas>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <cms_ideas>
+			        	<title>CMS IDEAS</title>
+						<sort_order>100</sort_order>
+                        <children>
+                            <dailydeal>
+                                <title>Daily Deal</title>
+                                <sort_order>30</sort_order>
+                                <children>
+                                    <dealitemsadd module="dailydeal">
+                                        <title>Add New Deal</title>
+                                        <sort_order>30</sort_order>
+                                        <action>dailydeal/adminhtml_dealitems/new</action>
+                                    </dealitemsadd>
+                                    <dealscheduler module="dailydeal">
+                                        <title>Add Multi Deal</title>
+                                        <sort_order>40</sort_order>
+                                        <action>dailydeal/adminhtml_dealscheduler/index</action>
+                                    </dealscheduler>
+                                    <dealitems module="dailydeal">
+                                        <title>Manage Deals</title>
+                                        <sort_order>50</sort_order>
+                                        <children>
+                                            <dealitemsa module="dailydeal">
+                                                <title>Current</title>
+                                                <sort_order>1</sort_order>
+                                                <action>dailydeal/adminhtml_dealitems/currentdeals</action>
+                                            </dealitemsa>
+                                            <dealschedule module="dailydeal">
+		                                        <title>With Days</title>
+		                                        <sort_order>2</sort_order>
+		                                        <action>dailydeal/adminhtml_dailyschedule/days</action>
+		                                    </dealschedule>
+                                            <dealitemsb module="dailydeal">
+                                                <title>All</title>
+                                                <sort_order>3</sort_order>
+                                                <action>dailydeal/adminhtml_dealitems/alldeals</action>
+                                            </dealitemsb>
+                                        </children>
+                                    </dealitems>
+                                    <configuration module="dailydeal">
+                                        <title>Settings</title>
+                                        <sort_order>60</sort_order>
+                                    <action>adminhtml/system_config/edit/section/dailydeal</action>
+                                    </configuration>
+                                </children>
+                            </dailydeal>
+                        </children>
+                    </cms_ideas>						
+                    <system>
+                        <children>
+                            <config>
+                                <children><!-- !Important : to view groups of tab module-->
+                                    <dailydeal module="dailydeal" translate="title">
+                                        <title>Daily Deal</title>                                            
+                                    </dailydeal> 
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Glace_Dailydeal>
+                <files>
+                    <default>Glace_Dailydeal.csv</default>
+                </files>
+            </Glace_Dailydeal>
+        </modules>
+    </translate>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <PI_Pay>
+            <version>0.1.0</version>
+        </PI_Pay>
+    </modules>
+    <global>
+        <models>
+            <pay>
+                <class>PI_pay_Model</class>
+            </pay>
+        </models>
+        <helpers>
+            <pay>
+                <class>PI_Pay_Helper</class>
+            </pay>
+        </helpers>
+    </global>
+    <default>
+        <payment>
+            <pay>
+                <active>1</active>
+                <model>pay/pay</model>
+                <order_status>processing</order_status>
+                <title>Custom Payment</title>
+				<message>Pay with your custom payment</message>
+            </pay>
+         </payment>
+    </default>
+</config>

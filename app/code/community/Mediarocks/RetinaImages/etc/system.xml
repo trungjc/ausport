@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Media Rocks GbR
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA that is bundled with 
+ * this package in the file MEDIAROCKS-LICENSE-COMMUNITY.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://solutions.mediarocks.de/MEDIAROCKS-LICENSE-COMMUNITY.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package is designed for Magento COMMUNITY edition. 
+ * Media Rocks does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Media Rocks does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension
+ * to newer versions in the future. If you wish to customize the extension
+ * for your needs please send an email to support@mediarocks.de
+ *
+ */
+-->
+<config>
+    <tabs>
+        <mediarocks translate="label" module="mediarocks_retinaimages">
+            <label>Media Rocks Extensions</label>
+            <sort_order>100</sort_order>
+        </mediarocks>
+    </tabs>
+    <sections>
+        <retinaimages translate="label" module="mediarocks_retinaimages">
+            <label>Retina Images</label>
+            <tab>mediarocks</tab>
+            <sort_order>2000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+            	<module translate="label comment">
+            		<label>Settings</label>
+            		<sort_order>0</sort_order>
+            		<show_in_default>1</show_in_default>
+            		<show_in_website>1</show_in_website>
+            		<show_in_store>1</show_in_store>            		
+            		<fields>
+            			<enabled translate="label comment">
+            				<label>Enable Module?</label>
+            				<comment>Selecting Yes will enable the module for the current scope.</comment>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+            				<sort_order>1</sort_order>
+            				<show_in_default>1</show_in_default>
+            				<show_in_website>1</show_in_website>
+            				<show_in_store>1</show_in_store>
+            			</enabled>
+            			<quality translate="label comment">
+            				<label>Retina Image Quality</label>
+            				<comment>
+                            <![CDATA[
+                                Here you can set the compression level for the retina images. Enter a value between 1 (lowest) and 100 (best). Defaults to 60 if left empty.<br/>
+                                <strong style="color:red;">NOTE: If you change this value, you have to flush your catalog images cache in "System" -> "Cache Store Management" -> "Additional Cache Management" to see the changes.</strong><br/>
+                            ]]>
+                            </comment>
+							<frontend_type>text</frontend_type>
+            				<sort_order>2</sort_order>
+                            <validate>validate-digits validate-greater-than-zero</validate>
+            				<show_in_default>1</show_in_default>
+            				<show_in_website>1</show_in_website>
+            				<show_in_store>1</show_in_store>
+            			</quality>
+            			<default_quality translate="label comment">
+            				<label>Default Image Quality</label>
+            				<comment>
+                            <![CDATA[
+                                Same as above but for the non-retina images. Defaults to 90 if left empty.
+                            ]]>
+                            </comment>
+							<frontend_type>text</frontend_type>
+            				<sort_order>3</sort_order>
+                            <validate>validate-digits validate-greater-than-zero</validate>
+            				<show_in_default>1</show_in_default>
+            				<show_in_website>1</show_in_website>
+            				<show_in_store>1</show_in_store>
+            			</default_quality>
+            		</fields>            	
+            	</module>
+            </groups>
+        </retinaimages>
+    </sections>
+</config>

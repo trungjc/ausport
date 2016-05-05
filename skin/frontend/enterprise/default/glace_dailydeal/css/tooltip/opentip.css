@@ -1,0 +1,363 @@
+/**
+ ** http://www.opentip.org
+ ** See opentip.js for the license.
+ **
+ ** One word about the different states when showing / hiding opentips.
+ **
+ ** An opentip starts with the .ot-completely-hidden class.
+ ** When shown, it changes to .ot-becoming-visible, then to .ot-visible (depending
+ ** on the length of the transition effect).
+ ** When hidden, it changes to .ot-hidden, and then to .ot-completely-hidden (again:
+ ** depending on the length of the transition effect).
+ **/
+.ot-container {
+	position: absolute;
+	top: 100px;
+	z-index: 100;
+}
+
+  .ot-container.ot-completely-hidden {
+    display: none;
+  }
+
+.opentip .title   { font-weight: bold; }
+.opentip .content { width: auto !important; margin-bottom: -16px;}
+
+
+.opentip .loadingIndication {
+	display: none;
+	padding: 10px 15px;
+	background: url("loading.gif") center center no-repeat;
+	width: 25px;
+	height: 15px;
+}
+.opentip .loadingIndication span { display: none; }
+.ot-loading .opentip .loadingIndication { display: block; }
+.ot-loading .opentip .content { display: none; }
+
+.ot-buttons {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.ot-buttons .close {
+  display: block;
+	width: 15px;
+	height: 15px;
+	display: block;
+	text-decoration: none;
+}
+.ot-container .stem-container {
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+.ot-container .stem {
+	position: absolute;
+	overflow: hidden;
+    color: #cccccc; /* JS will read this property to draw the stem in the right color. */
+/*    background: rgba(255, 0, 0, 0.5);*/
+}
+
+
+.ot-container .left { left: 0; }
+.ot-container .center { left: 50%; }
+.ot-container .right { right: 0; }
+.ot-container .top { top: 0; }
+.ot-container .middle { top: 50%; }
+.ot-container .bottom { bottom: 0; }
+
+
+.style-standard .opentip .title {
+	margin-bottom: 1px;
+}
+.style-standard .stem {
+    color: red; /* JS will read this property to draw the stem in the right color. */
+}
+.style-standard .ot-buttons {
+	/*top: -6px;
+	right: -6px;*/
+}
+.style-standard .ot-buttons .close {
+    background: url(../../images/bkg-close-16-black.png) no-repeat top left;
+    height: 16px;
+    margin-right: 6px;
+    margin-top: 3px;
+    width: 16px;
+}
+.style-standard .ot-buttons .close .canvas {
+  background:none !important;
+}
+
+
+
+
+
+
+.style-rounded .opentip .content {
+	padding: 6px 10px;
+}
+.style-rounded .stem {
+  color: #c3ddf0;
+}
+.style-rounded .ot-buttons {
+	top: -3px;
+	right: -3px;
+}
+.style-rounded .ot-buttons .close {
+	width: 21px;
+	height: 21px;
+}
+
+/*.ot-container{top:297px !important;}*/
+
+
+.style-slick .opentip .title {
+	color: #49677e;
+	padding: 5px 10px 3px 10px;
+	border-bottom: 1px solid #eeeeee;
+}/*
+.style-slick .opentip .content {
+	padding: 6px 10px;
+	border-top: 1px solid #fefefe;
+}*/
+.style-slick .stem {
+  color: #cccccc;
+}/*
+.style-slick .ot-buttons {
+	right: -7px;
+	top: -5px;
+}*/
+.style-slick .ot-buttons .close {
+	height: 19px;
+	width: 19px;
+}
+
+.style-glass .opentip .title {
+	color: #316F89;
+	font-family: serif;
+	font-style: italic;
+	margin: 0 0 20px 0;
+	font-size: 16px;
+}
+.style-glass .opentip .content {
+	color: #333333;
+}
+.style-glass .stem {
+  color: #ffffff;
+}
+.style-glass .ot-buttons {
+	right: -3px;
+	top: -3px;
+}
+.style-glass .ot-buttons .close {
+	width: 25px;
+	height: 25px;
+}
+
+/**
+
+IE 6 HACKS
+==========
+
+**/
+
+/*\*/
+.ot-buttons {
+	z-index: 110;
+}
+.opentip {
+	z-index: 110;
+}
+.opentipIFrame {
+	position: absolute;
+	top: 0;
+	left: 0;
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+	display:none;
+ 	/*sorry for IE5*/ display/**/:block;/*sorry for IE5*/
+ 	z-index:-1;/*must have*/
+ 	filter:mask();/*must have*/
+}
+
+.style-glass .opentip {
+	border: 1px solid #bbbbbb;
+}
+/**/
+
+
+
+
+
+
+
+.ot-container.ot-css3 {
+  -webkit-transition-duration: 1s; /* Well be reset by JS */
+  -webkit-transition-property: opacity, -webkit-transform;
+  -moz-transition-duration: 1s; /* Well be reset by JS */
+  -moz-transition-property: opacity, -moz-transform;
+  -o-transition-duration: 1s; /* Well be reset by JS */
+  -o-transition-property: opacity, -o-transform;
+
+  opacity: 1;
+}
+
+.ot-container.ot-css3.ot-completely-hidden {
+  display: none;
+}
+.ot-container{
+	/*left: 225px !important;*/
+  	position: absolute;
+  	/*top: 310px !important;*/
+}
+/** Appear / Fade**/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-appear,
+.ot-container.ot-css3.ot-hidden.ot-hide-fade {
+  opacity: 0;
+}
+
+
+
+/** Grow / Shrink **/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-grow,
+.ot-container.ot-css3.ot-hidden.ot-hide-shrink {
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+}
+
+
+
+/** Blind/Slide down / Blind up**/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-blindDown,
+.ot-container.ot-css3.ot-becoming-visible.ot-show-slideDown,
+.ot-container.ot-css3.ot-hidden.ot-hide-blindUp {
+  -webkit-transform: scaleY(0);
+  -moz-transform: scaleY(0);
+  -o-transform: scaleY(0);
+  opacity: 0;
+}
+
+
+/** Condense / Puff **/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-condense,
+.ot-container.ot-css3.ot-hidden.ot-hide-puff {
+  -webkit-transform: scale(5);
+  -moz-transform: scale(5);
+  -o-transform: scale(5);
+  opacity: 0;
+}
+
+/** Rotate **/
+.ot-container.ot-css3.ot-becoming-visible.ot-show-rotate {
+  -webkit-transform: scale(3) rotate(-500deg);
+  -moz-transform: scale(3) rotate(-500deg);
+  -o-transform: scale(3) rotate(-500deg);
+  opacity: 0;
+}
+.ot-container.ot-css3.ot-hidden.ot-hide-rotate {
+  -webkit-transform: scale(3) rotate(500deg);
+  -moz-transform: scale(3) rotate(500deg);
+  -o-transform: scale(3) rotate(500deg);
+  opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+
+Content design
+==============
+
+Nicer input fields, etc...
+
+*/
+
+
+.opentip label {
+	margin-bottom: 3px;
+	margin-top: 10px;
+	display: block;
+}
+.opentip input, .opentip textarea {
+	padding: 5px 6px;
+	border: 1px solid rgba(100, 100, 100, 0.2);
+	background: rgba(255,255,255,0.5);
+	display: block;
+	width: 100%;
+	margin: 3px 0 10px 0;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.opentip input:focus, .opentip textarea:focus {
+	border-color: rgba(100, 100, 100, 0.2);
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.opentip button {
+	margin-top: 20px;
+	display: block;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+
+
+	border: 1px solid rgba(247, 186, 0, 0.8);
+	background: rgba(247, 186, 0, 0.9);
+	font-size: 14px;
+	line-height: 14px;
+	padding: 10px 10px;
+	position: relative;
+	color: rgba(255,255,255, 1);
+	text-shadow: 0 0 10px rgba(255,255,255,0.3);
+	text-align: center;
+	font-weight: bold;
+	font-family: serif;
+	font-style: italic;
+	text-decoration: none;
+	margin: 20px 0 0 0;
+	cursor: pointer;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-box-shadow: 0 0 4px rgba(0,0,0,0.2),
+	                 0 -2px 10px rgba(255, 255, 255, 0.4) inset;
+	-webkit-box-shadow: 0 0 4px rgba(0,0,0,0.2),
+	                 0 -2px 10px rgba(255, 255, 255, 0.4) inset;
+}
+.opentip button {
+	padding: 8px 6px;
+}
+.button:hover, button:hover {
+	-moz-box-shadow: 0 0 6px rgba(247, 192, 25, 1),
+	                 0 -2px 10px rgba(255, 255, 255, 0.6) inset;
+	text-shadow: 0 0 4px rgba(255,255,255,1);
+}
+
+
+
+/** IE 6 HACKS **/
+/*\*/
+.opentip input, .opentip textarea, .opentip button {
+	width: 200px;
+}
+.style-standard .ot-buttons .close .canvas {
+   display:none;
+}
+/**/
